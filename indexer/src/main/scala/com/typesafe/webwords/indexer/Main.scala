@@ -13,15 +13,4 @@ import com.typesafe.webwords.common.AMQPCheck
  */
 object Main extends App {
     val config = WebWordsConfig()
-
-    if (!AMQPCheck.check(config))
-        throw new Exception("AMQP not working (start the AMQP service?)")
-
-    val worker = actorOf(new WorkerActor(config))
-
-    worker.start
-
-    // kind of a hack maybe.
-    val waitForever = new CountDownLatch(1)
-    waitForever.await
 }
