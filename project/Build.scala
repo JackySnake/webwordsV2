@@ -121,8 +121,7 @@ object WebWordsBuild extends Build {
       file("rabbitmq-akka-stream"),
       settings = projectSettings ++
         Seq(libraryDependencies ++= Seq(
-          , lib
-          , actor
+          actor
           , rabbit
           , logging
           , logbak
