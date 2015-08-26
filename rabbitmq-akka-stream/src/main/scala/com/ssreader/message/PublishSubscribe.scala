@@ -1,7 +1,6 @@
 package com.ssreader.message
 
 import akka.actor.{ActorRef, ActorSystem}
-import com.rabbitmq.client.BasicProperties
 import com.rabbitmq.client.Channel
 import com.rabbitmq.client.ConnectionFactory
 import com.rabbitmq.client.DefaultConsumer
@@ -38,7 +37,7 @@ object PublishSubscribe extends App {
         val queue = channel.queueDeclare().getQueue
         channel.queueBind(queue, exchange, "")
         val consumer = new DefaultConsumer(channel) {
-             def handleDelivery(consumerTag: String, envelope: Envelope, properties: BasicProperties, body: Array[Byte]) {
+            override def handleDelivery(consumerTag: String, envelope: Envelope, properties: BasicProperties, body: Array[Byte]) {
                 println("received: " + fromBytes(body))
             }
         }
@@ -62,11 +61,13 @@ object PublishSubscribe extends App {
         loop(0)
     }*/
 
-    val publisher = system.actorSelection("/user/rabbitmq/publisher")
+    val publisher = system.actorSelection("/user/rabbitmq/publisherX")
 
     def publish(channel: Channel, n: Long) {
         channel.basicPublish(exchange, "", null, toBytes(n))
     }
+
+//    publisher ! ChannelMessage(_.basicPublish(exchange, "", null, toBytes(135L)))
 
     val msgs = 0L to 33L
     msgs.foreach(x => publisher ! ChannelMessage(_.basicPublish(exchange, "", null, toBytes(x)), dropIfNoChannel = false))

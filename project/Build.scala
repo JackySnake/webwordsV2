@@ -98,7 +98,7 @@ object WebWordsBuild extends Build {
                             settings = projectSettings ++
                             Seq(
                               SbtStartScript.stage in Compile := Unit
-                            )) aggregate(common, web, indexer, message)
+                            )) aggregate(common, web, indexer, message, mining)
 
     lazy val web = Project("webwords-web",
                            file("web"),
@@ -119,6 +119,20 @@ object WebWordsBuild extends Build {
 
     lazy val message = Project("webwords-message",
       file("rabbitmq-akka-stream"),
+      settings = projectSettings ++
+        Seq(libraryDependencies ++= Seq(
+          actor
+          , rabbit
+          , logging
+          , logbak
+          , logcore
+          , scalatest
+          , config
+          , sse
+          , rabbitmq)))
+
+    lazy val mining = Project("webwords-mining",
+      file("mining"),
       settings = projectSettings ++
         Seq(libraryDependencies ++= Seq(
           actor
