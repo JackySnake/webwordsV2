@@ -1,10 +1,6 @@
 package com.typesafe.webwords.web
 
-import akka.actor._
-import akka.actor.Actor.actorOf
-import akka.http._
 import org.eclipse.jetty.server.Server
-import org.eclipse.jetty.servlet.ServletHolder
 import org.eclipse.jetty.servlet.ServletContextHandler
 import com.typesafe.webwords.common._
 
@@ -23,10 +19,11 @@ import com.typesafe.webwords.common._
 class WebServer(config: WebWordsConfig) {
     // to use Akka HTTP, we need a RootEndpoint which is an actor that
     // comes with Akka
-    private val rootEndpoint = actorOf[RootEndpoint]
+//    private val rootEndpoint = actorOf[RootEndpoint]
+
     // we register this bootstrap actor with the RootEndpoint, and have
     // it dispatch requests for us
-    private val bootstrap = actorOf(new WebBootstrap(rootEndpoint, config))
+//    private val bootstrap = actorOf(new WebBootstrap(rootEndpoint, config))
 
     private var maybeServer: Option[Server] = None
 
@@ -34,8 +31,8 @@ class WebServer(config: WebWordsConfig) {
         if (maybeServer.isDefined)
             throw new IllegalStateException("can't start http server twice")
 
-        rootEndpoint.start
-        bootstrap.start
+//        rootEndpoint.start
+//        bootstrap.start
 
         val server = new Server(config.port.getOrElse(8080))
 
@@ -45,7 +42,7 @@ class WebServer(config: WebWordsConfig) {
         handler.setContextPath("/")
         // AkkaMistServlet forwards requests to the rootEndpoint which
         // in turn forwards them to our bootstrap actor.
-        handler.addServlet(new ServletHolder(new AkkaMistServlet()), "/*")
+//        handler.addServlet(new ServletHolder(new AkkaMistServlet()), "/*")
 
         server.setHandler(handler)
 
@@ -64,7 +61,7 @@ class WebServer(config: WebWordsConfig) {
         }
         maybeServer = None
 
-        bootstrap.stop
-        rootEndpoint.stop
+//        bootstrap.stop
+//        rootEndpoint.stop
     }
 }
