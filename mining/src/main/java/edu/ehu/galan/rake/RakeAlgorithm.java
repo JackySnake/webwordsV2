@@ -309,12 +309,12 @@ public class RakeAlgorithm extends AbstractAlgorithm {
         this.minNumberOfletters = minNumberOfletters;
     }
 
-     private  boolean containsDigit(String string) {
-		for (char c : string.toCharArray()) {
-			if (Character.isDigit(c)) {
-                            return true;
-                        }
-		}
-		return false;
-	}
+    private boolean containsDigit(String string) {
+        for (char c : string.toCharArray()) {
+            if (Character.isDigit(c)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
