@@ -23,21 +23,18 @@ package edu.ehu.galan.rake;
 import edu.ehu.galan.rake.model.AbstractAlgorithm;
 import edu.ehu.galan.rake.model.Document;
 import edu.ehu.galan.rake.model.Term;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-//import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-//import static java.util.stream.Collectors.toList;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  *
@@ -268,9 +265,9 @@ public class RakeAlgorithm extends AbstractAlgorithm {
                 }
                 termLi.add(new Term(phrase, score));
             }
-//            Comparator<? super Term> sorter = (o1, o2) -> o1.getScore() > o2.getScore() ? -1 : o1.getScore() == o2.getScore() ? 0 : 1;
-//            List<Term> orderedList = termLi.parallelStream().sorted(sorter).distinct().collect(toList());
-//            doc.setTermList(orderedList);
+            Comparator<? super Term> sorter = (o1, o2) -> o1.getScore() > o2.getScore() ? -1 : o1.getScore() == o2.getScore() ? 0 : 1;
+            List<Term> orderedList = termLi.parallelStream().sorted(sorter).distinct().collect(toList());
+            doc.setTermList(orderedList);
             
         }
     }

@@ -84,6 +84,10 @@ object Dependencies {
     val logcore   = "ch.qos.logback" %   "logback-classic"          % "1.1.2"
 
     val scalatest = "org.scalatest"              %%  "scalatest"                % "2.2.1" % "test"
+
+    val gson = "com.google.code.gson" % "gson" % "2.3.1"
+    val commonsio = "commons-io" % "commons-io" % "2.4"
+
 }
 
 object WebWordsBuild extends Build {
@@ -143,6 +147,8 @@ object WebWordsBuild extends Build {
           , scalatest
           , config
           , sse
-          , rabbitmq)))
+          , rabbitmq
+          , gson
+          , commonsio)))
 }
 
