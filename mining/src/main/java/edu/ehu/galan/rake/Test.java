@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Test {
     public static void main(String[] args) {
-        List<LinkedList<Token>> tokenizedSentenceList;
+        /*List<LinkedList<Token>> tokenizedSentenceList;
         List<String> sentenceList;
         POSTagger tagger = new POSTagger();
         Chunker chunker = new Chunker();
@@ -35,6 +35,6 @@ public class Test {
                 sentence = "";
             }
         }
-        parser.reset();
+        parser.reset();*/
     }
 }
