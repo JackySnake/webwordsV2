@@ -32,7 +32,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.Callable;
-import java.util.stream.Collectors;
+//import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -81,14 +81,14 @@ public abstract class AbstractAlgorithm implements Callable<Integer> {
      * @param pThreshold
      * @return
      */
-    public List<Term> getThresholdedTermList(float pThreshold) {
+    /*public List<Term> getThresholdedTermList(float pThreshold) {
         if (isScored()) {
             return getTermList().stream().filter((scoredTerm) -> (scoredTerm.getScore() > pThreshold)).collect(Collectors.toList());
         } else {
             logger.warn("You can't get a thresholded list because this is not a scored algorithm");
             return null;
         }
-    }
+    }*/
 
     /**
      * Apply a stopWord list to the term list, will search for the stopword in
@@ -191,7 +191,7 @@ public abstract class AbstractAlgorithm implements Callable<Integer> {
      * Prints in the standar output the algorithm results
      */
     public final void print() {
-        if (isScored()) {
+        /*if (isScored()) {
             getTermList().stream().forEach((scoredTerm) -> {
                 System.out.printf("%s \t %f", scoredTerm.getTerm(), scoredTerm.getScore());
             });
@@ -199,7 +199,7 @@ public abstract class AbstractAlgorithm implements Callable<Integer> {
             getTermList().stream().forEach((scoredTerm) -> {
                 System.out.printf("%s \t %f", scoredTerm.getTerm());
             });
-        }
+        }*/
     }
 
     /**
@@ -298,7 +298,7 @@ public abstract class AbstractAlgorithm implements Callable<Integer> {
     
     
     public void sort(Comparator<Term> comparator){
-       termList= this.getTermList().stream().sorted(comparator).collect(Collectors.toList());
+//       termList= this.getTermList().stream().sorted(comparator).collect(Collectors.toList());
     }
 
     /**
