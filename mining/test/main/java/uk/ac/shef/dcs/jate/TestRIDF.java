@@ -1,32 +1,9 @@
 package uk.ac.shef.dcs.jate;
 
-import net.didion.jwnl.JWNLException;
-import uk.ac.shef.dcs.jate.core.algorithm.*;
-import uk.ac.shef.dcs.jate.core.feature.FeatureBuilderCorpusTermFrequency;
-import uk.ac.shef.dcs.jate.core.feature.FeatureCorpusTermFrequency;
-import uk.ac.shef.dcs.jate.core.feature.TermVariantsUpdater;
-import uk.ac.shef.dcs.jate.core.feature.indexer.GlobalIndexBuilderMem;
-import uk.ac.shef.dcs.jate.core.feature.indexer.GlobalIndexMem;
-import uk.ac.shef.dcs.jate.core.extractor.CandidateTermExtractor;
-import uk.ac.shef.dcs.jate.core.extractor.WordExtractor;
-import uk.ac.shef.dcs.jate.io.ResultWriter2File;
-import uk.ac.shef.dcs.jate.model.CorpusImpl;
-import uk.ac.shef.dcs.jate.model.Term;
-import uk.ac.shef.dcs.jate.util.control.Lemmatizer;
-import uk.ac.shef.dcs.jate.util.control.StopList;
-import uk.ac.shef.dcs.jate.util.counter.TermFreqCounter;
-import uk.ac.shef.dcs.jate.util.counter.WordCounter;
-
-import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Logger;
-
 /**
  */
 public class TestRIDF {
-    private Map<Algorithm, AbstractFeatureWrapper> _algregistry = new HashMap<Algorithm, AbstractFeatureWrapper>();
+    /*private Map<Algorithm, AbstractFeatureWrapper> _algregistry = new HashMap<Algorithm, AbstractFeatureWrapper>();
 	private static Logger _logger = Logger.getLogger(AlgorithmTester.class.getName());
 
 	public void registerAlgorithm(Algorithm a, AbstractFeatureWrapper f) {
@@ -39,15 +16,15 @@ public class TestRIDF {
 		if (_algregistry.size() == 0) throw new JATEException("No algorithm registered!");
 		_logger.info("Running NP recognition...");
 
-		/*.extractNP(c);*/
+		*//*.extractNP(c);*//*
 		for (Map.Entry<Algorithm, AbstractFeatureWrapper> en : _algregistry.entrySet()) {
 			_logger.info("Running feature store builder and ATR..." + en.getKey().toString());
 			Term[] result = en.getKey().execute(en.getValue());
 			writer.output(result, en.getKey().toString() + ".txt");
 		}
-	}
+	}*/
 
-	public static void main(String[] args) throws IOException, JATEException, JWNLException {
+	/*public static void main(String[] args) throws IOException, JATEException, JWNLException {
 
 		String path_to_corpus= args[0];
 		String path_to_output= args[1];
@@ -79,7 +56,7 @@ public class TestRIDF {
 			//build the global resource index
 			GlobalIndexMem termDocIndex = builder.build(new CorpusImpl(path_to_corpus), npextractor);
 			
-			/*newly added for improving frequency count calculation: begins*/
+			*//*newly added for improving frequency count calculation: begins*//*
 			
 			TermVariantsUpdater update = new TermVariantsUpdater(termDocIndex, stop, lemmatizer);
 			
@@ -89,17 +66,16 @@ public class TestRIDF {
 			FeatureCorpusTermFrequency termCorpusFreq =
 							new FeatureBuilderCorpusTermFrequency(npcounter, wordcounter, lemmatizer).build(termIndex);
 
-			/*newly added for improving frequency count calculation: ends*/
+			*//*newly added for improving frequency count calculation: ends*//*
 			
 
 			//build a feature store required by the tfidf algorithm, using the processors instantiated above
-			/*FeatureCorpusTermFrequency termCorpusFreq =
+			*//*FeatureCorpusTermFrequency termCorpusFreq =
 					new FeatureBuilderCorpusTermFrequency(npcounter, wordcounter, lemmatizer).build(termDocIndex);
-			*/
+			*//*
 			AlgorithmTester tester = new AlgorithmTester();
 			tester.registerAlgorithm(new RIDFAlgorithm(), new RIDFFeatureWrapper(termCorpusFreq));
 			tester.execute(termDocIndex, path_to_output);
 			System.out.println("Ended at: " + new Date());
-		}
+		}*/
 	}
-//}

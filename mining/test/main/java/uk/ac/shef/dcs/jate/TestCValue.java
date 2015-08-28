@@ -1,30 +1,8 @@
 package uk.ac.shef.dcs.jate;
 
-import net.didion.jwnl.JWNLException;
-import uk.ac.shef.dcs.jate.core.algorithm.*;
-import uk.ac.shef.dcs.jate.core.extractor.CandidateTermExtractor;
-import uk.ac.shef.dcs.jate.core.extractor.NounPhraseExtractorOpenNLP;
-import uk.ac.shef.dcs.jate.core.feature.*;
-import uk.ac.shef.dcs.jate.core.feature.indexer.GlobalIndexBuilderMem;
-import uk.ac.shef.dcs.jate.core.feature.indexer.GlobalIndexMem;
-import uk.ac.shef.dcs.jate.io.ResultWriter2File;
-import uk.ac.shef.dcs.jate.model.CorpusImpl;
-import uk.ac.shef.dcs.jate.model.Term;
-import uk.ac.shef.dcs.jate.util.control.Lemmatizer;
-import uk.ac.shef.dcs.jate.util.control.StopList;
-import uk.ac.shef.dcs.jate.util.counter.TermFreqCounter;
-import uk.ac.shef.dcs.jate.util.counter.WordCounter;
-
-import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Logger;
-
-
 public class TestCValue {
 
-    private Map<Algorithm, AbstractFeatureWrapper> _algregistry = new HashMap<Algorithm, AbstractFeatureWrapper>();
+    /*private Map<Algorithm, AbstractFeatureWrapper> _algregistry = new HashMap<Algorithm, AbstractFeatureWrapper>();
     private static Logger _logger = Logger.getLogger(AlgorithmTester.class.getName());
 
     public void registerAlgorithm(Algorithm a, AbstractFeatureWrapper f) {
@@ -37,7 +15,7 @@ public class TestCValue {
         if (_algregistry.size() == 0) throw new JATEException("No algorithm registered!");
         _logger.info("Running NP recognition...");
 
-		/*.extractNP(c);*/
+		*//*.extractNP(c);*//*
         for (Map.Entry<Algorithm, AbstractFeatureWrapper> en : _algregistry.entrySet()) {
             _logger.info("Running feature store builder and ATR..." + en.getKey().toString());
             Term[] result = en.getKey().execute(en.getValue());
@@ -81,7 +59,7 @@ public class TestCValue {
             //build the global resource index
             GlobalIndexMem termDocIndex = builder.build(new CorpusImpl(path_to_corpus), npextractor);
 
-			/*newly added for improving frequency count calculation: begins*/
+			*//*newly added for improving frequency count calculation: begins*//*
 
 
             TermVariantsUpdater update = new TermVariantsUpdater(termDocIndex, stop, lemmatizer);
@@ -93,15 +71,15 @@ public class TestCValue {
                     new FeatureBuilderCorpusTermFrequency(npcounter, wordcounter, lemmatizer).build(termIndex);
 
 			
-			/*newly added for improving frequency count calculation: ends*/
+			*//*newly added for improving frequency count calculation: ends*//*
 
 
             //build a feature store required by the tfidf algorithm, using the processors instantiated above
-			/*FeatureCorpusTermFrequency termCorpusFreq =
+			*//*FeatureCorpusTermFrequency termCorpusFreq =
 				new FeatureBuilderCorpusTermFrequency(npcounter, wordcounter, lemmatizer).build(termDocIndex);
 			FeatureTermNest termNest =
 					new FeatureBuilderTermNest().build(termDocIndex);
-					*/
+					*//*
             FeatureTermNest termNest =
                     new FeatureBuilderTermNest().build(termIndex);
 
@@ -113,7 +91,7 @@ public class TestCValue {
             return tester;
         }
         return null;
-    }
+    }*/
 }
 
 

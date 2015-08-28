@@ -34,7 +34,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static java.util.stream.Collectors.toList;
+//import static java.util.stream.Collectors.toList;
 
 /**
  *
@@ -265,9 +265,9 @@ public class RakeAlgorithm extends AbstractAlgorithm {
                 }
                 termLi.add(new Term(phrase, score));
             }
-            Comparator<? super Term> sorter = (o1, o2) -> o1.getScore() > o2.getScore() ? -1 : o1.getScore() == o2.getScore() ? 0 : 1;
-            List<Term> orderedList = termLi.parallelStream().sorted(sorter).distinct().collect(toList());
-            doc.setTermList(orderedList);
+//            Comparator<? super Term> sorter = (o1, o2) -> o1.getScore() > o2.getScore() ? -1 : o1.getScore() == o2.getScore() ? 0 : 1;
+//            List<Term> orderedList = termLi.parallelStream().sorted(sorter).distinct().collect(toList());
+//            doc.setTermList(orderedList);
             
         }
     }

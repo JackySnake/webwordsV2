@@ -1,27 +1,7 @@
 package uk.ac.shef.dcs.jate;
 
-import net.didion.jwnl.JWNLException;
-import uk.ac.shef.dcs.jate.core.algorithm.AlgorithmTester;
-import uk.ac.shef.dcs.jate.core.algorithm.FrequencyFeatureWrapper;
-import uk.ac.shef.dcs.jate.core.algorithm.JustesonAlgorithm;
-import uk.ac.shef.dcs.jate.core.extractor.CandidateTermExtractor;
-import uk.ac.shef.dcs.jate.core.extractor.NounPhraseExtractorOpenNLP;
-import uk.ac.shef.dcs.jate.core.feature.FeatureBuilderCorpusTermFrequency;
-import uk.ac.shef.dcs.jate.core.feature.FeatureCorpusTermFrequency;
-import uk.ac.shef.dcs.jate.core.feature.TermVariantsUpdater;
-import uk.ac.shef.dcs.jate.core.feature.indexer.GlobalIndexBuilderMem;
-import uk.ac.shef.dcs.jate.core.feature.indexer.GlobalIndexMem;
-import uk.ac.shef.dcs.jate.model.CorpusImpl;
-import uk.ac.shef.dcs.jate.util.control.Lemmatizer;
-import uk.ac.shef.dcs.jate.util.control.StopList;
-import uk.ac.shef.dcs.jate.util.counter.TermFreqCounter;
-import uk.ac.shef.dcs.jate.util.counter.WordCounter;
-
-import java.io.IOException;
-import java.util.Date;
-
 public class TestJustesonKatz {
-    public static void main(String[] args) throws IOException, JATEException, JWNLException {
+    /*public static void main(String[] args) throws IOException, JATEException, JWNLException {
 
 
         String path_to_corpus = args[0];
@@ -52,7 +32,7 @@ public class TestJustesonKatz {
         //build the global resource index
         GlobalIndexMem termDocIndex = builder.build(new CorpusImpl(path_to_corpus), npextractor);
 
-		/*newly added for improving frequency count calculation: begins*/
+		*//*newly added for improving frequency count calculation: begins*//*
 
 
         TermVariantsUpdater update = new TermVariantsUpdater(termDocIndex, stop, lemmatizer);
@@ -64,7 +44,7 @@ public class TestJustesonKatz {
                 new FeatureBuilderCorpusTermFrequency(npcounter, wordcounter, lemmatizer).build(termIndex);
 			
 		
-		/*newly added for improving frequency count calculation: ends*/
+		*//*newly added for improving frequency count calculation: ends*//*
 
         //build a feature store required by the tfidf algorithm, using the processors instantiated above
         //		FeatureCorpusTermFrequency termCorpusFreq =
@@ -76,5 +56,5 @@ public class TestJustesonKatz {
 
         tester.execute(termDocIndex, path_to_output);
         System.out.println("Ended at: " + new Date());
-    }
+    }*/
 }

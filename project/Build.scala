@@ -26,7 +26,10 @@ object BuildSettings {
           , releases
           , typesafe
           , hseeberger
-          , thenewmotion))
+          , thenewmotion
+//          , ossrh
+//          , apache
+        ))
 
 //  resolvers += Resolver.sonatypeRepo("snapshots"),
 //  resolvers += Resolver.sonatypeRepo("releases")
@@ -38,15 +41,19 @@ object BuildSettings {
 
 object Resolvers {
     val sonatypeRepo = "Sonatype Release" at "http://oss.sonatype.org/content/repositories/releases"
-    val jbossRepo = "JBoss" at "http://repository.jboss.org/nexus/content/groups/public/"
-    val akkaRepo = "Akka" at "http://repo.akka.io/repository/"
-
   val snapshots = "snapshots"           at "http://oss.sonatype.org/content/repositories/snapshots"
+  val jbossRepo = "JBoss" at "http://repository.jboss.org/nexus/content/groups/public/"
+
+    val akkaRepo = "Akka" at "http://repo.akka.io/repository/"
   val releases = "releases"            at "http://oss.sonatype.org/content/repositories/releases"
   val typesafe = "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
   val hseeberger = "hseeberger at bintray" at "http://dl.bintray.com/hseeberger/maven"
 
   val thenewmotion = "The New Motion Public Repo" at "http://nexus.thenewmotion.com/content/groups/public/"
+
+//  val ossrh = "NLP" at "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+
+//  val apache = "apache opennlp releases" at "https://repository.apache.org/content/repositories/releases/"
 }
 
 object Dependencies {
@@ -88,8 +95,14 @@ object Dependencies {
     val gson = "com.google.code.gson" % "gson" % "2.3.1"
     val commonsio = "commons-io" % "commons-io" % "2.4"
 
-    val opennlp = "org.apache.opennlp" % "opennlp" % "1.5.3"
+    val opennlp = "org.apache.opennlp" % "opennlp-tools" % "1.5.3"
     val jwnl = "net.sf.jwordnet" % "jwnl" % "1.3.3"
+
+  val xerces = "xerces" % "xercesImpl" % "2.9.1"
+
+  val nekohtml = "net.sourceforge.nekohtml" % "nekohtml" % "1.9.13"
+
+
 
 }
 
@@ -105,7 +118,7 @@ object WebWordsBuild extends Build {
                             settings = projectSettings ++
                             Seq(
                               SbtStartScript.stage in Compile := Unit
-                            )) aggregate(common, web, indexer, message, mining)
+                            )) aggregate(common, web, indexer, message, mining, boilerpip)
 
     lazy val web = Project("webwords-web",
                            file("web"),
@@ -155,5 +168,23 @@ object WebWordsBuild extends Build {
           , commonsio
           , opennlp
           , jwnl)))
+
+  lazy val boilerpip = Project("webwords-boilerpipe-common",
+    file("boilerpipe-common"),
+    settings = projectSettings ++
+      Seq(libraryDependencies ++= Seq(
+        actor
+        , rabbit
+        , logging
+        , logbak
+        , logcore
+        , scalatest
+        , config
+        , sse
+        , rabbitmq
+        , gson
+        , nekohtml
+        , opennlp
+        , xerces)))
 }
 

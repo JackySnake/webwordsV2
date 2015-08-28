@@ -1,27 +1,5 @@
 package uk.ac.shef.dcs.jate;
 
-import net.didion.jwnl.JWNLException;
-import uk.ac.shef.dcs.jate.core.algorithm.*;
-import uk.ac.shef.dcs.jate.core.extractor.CandidateTermExtractor;
-import uk.ac.shef.dcs.jate.core.extractor.VerbPhraseExtractorOpenNLP;
-import uk.ac.shef.dcs.jate.core.feature.FeatureBuilderCorpusTermFrequency;
-import uk.ac.shef.dcs.jate.core.feature.FeatureCorpusTermFrequency;
-import uk.ac.shef.dcs.jate.core.feature.indexer.GlobalIndexBuilderMem;
-import uk.ac.shef.dcs.jate.core.feature.indexer.GlobalIndexMem;
-import uk.ac.shef.dcs.jate.io.ResultWriter2File;
-import uk.ac.shef.dcs.jate.model.CorpusImpl;
-import uk.ac.shef.dcs.jate.model.Term;
-import uk.ac.shef.dcs.jate.util.control.Lemmatizer;
-import uk.ac.shef.dcs.jate.util.control.StopList;
-import uk.ac.shef.dcs.jate.util.counter.TermFreqCounter;
-import uk.ac.shef.dcs.jate.util.counter.WordCounter;
-
-import java.io.IOException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Logger;
-
 /**
  * <p>
  * DESCRIPTIONS
@@ -33,7 +11,7 @@ import java.util.logging.Logger;
  */
 public class TestFrequency {
 
-    private Map<Algorithm, AbstractFeatureWrapper> _algregistry = new HashMap<Algorithm, AbstractFeatureWrapper>();
+    /*private Map<Algorithm, AbstractFeatureWrapper> _algregistry = new HashMap<Algorithm, AbstractFeatureWrapper>();
     private static Logger _logger = Logger.getLogger(AlgorithmTester.class.getName());
 
     public void registerAlgorithm(Algorithm a, AbstractFeatureWrapper f) {
@@ -46,7 +24,7 @@ public class TestFrequency {
         if (_algregistry.size() == 0) throw new JATEException("No algorithm registered!");
         _logger.info("Running NP recognition...");
 
-		/*.extractNP(c);*/
+		*//*.extractNP(c);*//*
         for (Map.Entry<Algorithm, AbstractFeatureWrapper> en : _algregistry.entrySet()) {
             _logger.info("Running feature store builder and ATR..." + en.getKey().toString());
             Term[] result = en.getKey().execute(en.getValue());
@@ -93,5 +71,5 @@ public class TestFrequency {
             tester.execute(termDocIndex, args[1]);
             System.out.println("Ended at: " + new Date());
         }
-    }
+    }*/
 }

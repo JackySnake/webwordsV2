@@ -1,27 +1,8 @@
 package uk.ac.shef.dcs.jate;
 
-import net.didion.jwnl.JWNLException;
-import uk.ac.shef.dcs.jate.core.algorithm.*;
-import uk.ac.shef.dcs.jate.core.extractor.CandidateTermExtractor;
-import uk.ac.shef.dcs.jate.core.extractor.NGramExtractor;
-import uk.ac.shef.dcs.jate.core.feature.FeatureBuilderCorpusTermFrequency;
-import uk.ac.shef.dcs.jate.core.feature.FeatureCorpusTermFrequency;
-import uk.ac.shef.dcs.jate.core.feature.TermVariantsUpdater;
-import uk.ac.shef.dcs.jate.core.feature.indexer.GlobalIndexBuilderMem;
-import uk.ac.shef.dcs.jate.core.feature.indexer.GlobalIndexMem;
-import uk.ac.shef.dcs.jate.model.CorpusImpl;
-import uk.ac.shef.dcs.jate.util.control.Lemmatizer;
-import uk.ac.shef.dcs.jate.util.control.StopList;
-import uk.ac.shef.dcs.jate.util.counter.TermFreqCounter;
-import uk.ac.shef.dcs.jate.util.counter.WordCounter;
-
-import java.io.IOException;
-import java.util.Date;
-
-
 public class TestChiSquare {
 
-    public static void main(String[] args) throws IOException, JATEException, JWNLException {
+    /*public static void main(String[] args) throws IOException, JATEException, JWNLException {
 
         String path_to_corpus = args[0];
         String path_to_output = args[1];
@@ -50,10 +31,10 @@ public class TestChiSquare {
         //build the global resource index
         GlobalIndexMem termDocIndex = builder.build(new CorpusImpl(path_to_corpus), npextractor);
 
-			/*newly added for improving frequency count calculation: begins*/
+			*//*newly added for improving frequency count calculation: begins*//*
         TermVariantsUpdater update = new TermVariantsUpdater(termDocIndex, stop, lemmatizer);
         GlobalIndexMem termIndex = update.updateVariants();
-            /*newly added for improving frequency count calculation: ends*/
+            *//*newly added for improving frequency count calculation: ends*//*
 
         FeatureCorpusTermFrequency termCorpusFreq =
                 new FeatureBuilderCorpusTermFrequency(npcounter, wordcounter, lemmatizer).build(termIndex);
@@ -70,5 +51,5 @@ public class TestChiSquare {
 
         System.out.println("Ended at: " + new Date());
 
-    }
+    }*/
 }
