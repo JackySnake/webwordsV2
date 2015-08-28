@@ -88,6 +88,9 @@ object Dependencies {
     val gson = "com.google.code.gson" % "gson" % "2.3.1"
     val commonsio = "commons-io" % "commons-io" % "2.4"
 
+    val opennlp = "org.apache.opennlp" % "opennlp" % "1.5.3"
+    val jwnl = "net.sf.jwordnet" % "jwnl" % "1.3.3"
+
 }
 
 object WebWordsBuild extends Build {
@@ -149,6 +152,8 @@ object WebWordsBuild extends Build {
           , sse
           , rabbitmq
           , gson
-          , commonsio)))
+          , commonsio
+          , opennlp
+          , jwnl)))
 }
 
