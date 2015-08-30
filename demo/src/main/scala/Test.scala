@@ -1,24 +1,26 @@
 /**
  * Created by joseph on 8/30/15.
  */
+
 import scala.concurrent._
 import scala.concurrent.duration._
 import scala.concurrent.ExecutionContext
 
 import java.util.concurrent.Executors
-import java.lang.System.{ nanoTime => now }
+import java.lang.System.{nanoTime => now}
 
 object Test extends App {
   //implicit val xc = ExecutionContext.global
   implicit val xc = ExecutionContext fromExecutorService (Executors.newSingleThreadExecutor)
 
-  def timed[A](body: =>A): A = {
+  def timed[A](body: => A): A = {
     val start = now
     val res = body
     val end = now
-    Console println (Duration fromNanos end-start).toMillis + " " + res
+    Console println (Duration fromNanos end - start).toMillis + " " + res
     res
   }
+
   println("Creating futureList")
 
   val timeout = 1500 millis
@@ -37,7 +39,7 @@ object Test extends App {
   println("Created")
 
   timed {
-    val results = Await result (waitingList, 2 * timeout * futures.size)
+    val results = Await result(waitingList, 2 * timeout * futures.size)
     println(results)
   }
   xc.shutdown
