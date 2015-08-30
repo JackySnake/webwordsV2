@@ -1,6 +1,6 @@
 package edu.ehu.galan.rake;
 
-import edu.ehu.galan.rake.model.Token;
+//import edu.ehu.galan.rake.model.Token;
 
 import java.util.LinkedList;
 import java.util.List;
