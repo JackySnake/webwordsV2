@@ -118,7 +118,7 @@ object WebWordsBuild extends Build {
                             settings = projectSettings ++
                             Seq(
                               SbtStartScript.stage in Compile := Unit
-                            )) aggregate(common, web, indexer, message, mining, boilerpip)
+                            )) aggregate(common, web, indexer, message, mining, boilerpip, demo)
 
     lazy val web = Project("webwords-web",
                            file("web"),
@@ -171,6 +171,24 @@ object WebWordsBuild extends Build {
 
   lazy val boilerpip = Project("webwords-boilerpipe-common",
     file("boilerpipe-common"),
+    settings = projectSettings ++
+      Seq(libraryDependencies ++= Seq(
+        actor
+        , rabbit
+        , logging
+        , logbak
+        , logcore
+        , scalatest
+        , config
+        , sse
+        , rabbitmq
+        , gson
+        , nekohtml
+        , opennlp
+        , xerces)))
+
+  lazy val demo = Project("webwords-demo",
+    file("demo"),
     settings = projectSettings ++
       Seq(libraryDependencies ++= Seq(
         actor
