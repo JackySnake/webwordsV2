@@ -9,7 +9,8 @@ import java.net.URL;
 
 public interface Document {
 
-	URL getUrl();
+    URL getUrl();
 
-	String getContent();
+    String getContent();
+
 }
