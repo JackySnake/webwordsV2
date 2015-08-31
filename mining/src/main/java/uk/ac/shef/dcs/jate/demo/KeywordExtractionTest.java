@@ -2,20 +2,12 @@ package uk.ac.shef.dcs.jate.demo;
 
 import net.didion.jwnl.JWNLException;
 import uk.ac.shef.dcs.jate.JATEException;
-import uk.ac.shef.dcs.jate.core.algorithm.RAKEAlgorithm;
-import uk.ac.shef.dcs.jate.core.algorithm.RAKEFeatureWrapper;
-import uk.ac.shef.dcs.jate.core.extractor.PhraseExtractor;
-import uk.ac.shef.dcs.jate.core.feature.indexer.GlobalIndexBuilderMem;
-import uk.ac.shef.dcs.jate.model.CorpusImpl;
 import uk.ac.shef.dcs.jate.model.Document;
 import uk.ac.shef.dcs.jate.model.InMemoryDocument;
 import uk.ac.shef.dcs.jate.model.Term;
-import uk.ac.shef.dcs.jate.util.control.Lemmatizer;
-import uk.ac.shef.dcs.jate.util.control.StopList;
+import uk.ac.shef.dcs.jate.processing.KeywordExtraction;
 
 import java.io.IOException;
-import java.util.Date;
-import java.util.List;
 
 
 public class KeywordExtractionTest {
@@ -23,28 +15,6 @@ public class KeywordExtractionTest {
     public static void main(String[] args) throws IOException, JATEException, JWNLException {
 
 
-//        String path_to_corpus = "/home/joseph/smartdev/bitbucket/test/abc";//args[0];
-        String path_to_output = "/home/joseph/smartdev/bitbucket/out/abc";//args[1];
-
-        System.out.println("Started " + KeywordExtractionTest.class + " at: " + new Date() + "... For detailed progress see log file jate.log.");
-
-        //creates instances of required processors and resources
-
-        //stop word list
-        StopList stop = new StopList(true);
-
-        //lemmatiser
-        Lemmatizer lemmatizer = new Lemmatizer();
-
-        //noun phrase extractor
-        PhraseExtractor npextractor = new PhraseExtractor(stop, lemmatizer);
-
-        GlobalIndexBuilderMem indexbuilder = new GlobalIndexBuilderMem();
-
-        //build the global resource index
-
-//        List<String> candidates = indexbuilder.build(new CorpusImpl(path_to_corpus), npextractor);
-        CorpusImpl corpus = new CorpusImpl();
         Document document = new InMemoryDocument("While the brain sleeps, it clears out harmful toxins, a process that may reduce the risk of Alzheimer's, researchers say.\n" +
                 "During sleep, the flow of cerebrospinal fluid in the brain increases dramatically, washing away harmful waste proteins that build up between brain cells during waking hours, a study of mice found.\n" +
                 "\"It's like a dishwasher,\" says Dr. Maiken Nedergaard , a professor of neurosurgery at the University of Rochester and an author of the study in Science.\n" +
@@ -60,13 +30,9 @@ public class KeywordExtractionTest {
                 "Researchers who study Alzheimer's say Nedergaard's research could help explain a number of recent findings related to sleep. One of these involves how sleep affects levels of beta amyloid, says Randall Bateman , a professor of neurology Washington University in St. Louis who wasn't involved in the study.\n" +
                 "\"Beta amyloid concentrations continue to increase while a person is awake,\" Bateman says. \"And then after people go to sleep that concentration of beta amyloid decreases. This report provides a beautiful mechanism by which this may be happening.\"\n" +
                 "The report also offers a tantalizing hint of a new approach to Alzheimer's prevention, Bateman says. \"It does raise the possibility that one might be able to actually control sleep in a way to improve the clearance of beta amyloid and help prevent amyloidosis that we think can lead to Alzheimer's disease.\"\n");
-        corpus.add(document);
-        List<String> candidates = indexbuilder.build(corpus, npextractor);
 
-
-        RAKEAlgorithm rakeAlgorithm = new RAKEAlgorithm();
-        RAKEFeatureWrapper wrapper = new RAKEFeatureWrapper(candidates);
-        Term[] result = rakeAlgorithm.execute(wrapper);
+        KeywordExtraction extraction = new KeywordExtraction(document);
+        Term[] result = extraction.extractKeywords();
 
         for (Term term : result) {
             System.out.println(term.getConcept() + " " + term.getConfidence());
@@ -76,7 +42,7 @@ public class KeywordExtractionTest {
         tester.registerAlgorithm(new RAKEAlgorithm(), new RAKEFeatureWrapper(candidates));
         tester.execute(path_to_output);*/
 
-        System.out.println("Ended at: " + new Date());
+//        System.out.println("Ended at: " + new Date());
 
 
     }
