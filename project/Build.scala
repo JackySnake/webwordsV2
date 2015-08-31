@@ -102,7 +102,7 @@ object Dependencies {
 
   val nekohtml = "net.sourceforge.nekohtml" % "nekohtml" % "1.9.13"
 
-
+  val fihttp = "com.twitter" %% "finagle-http" % "6.28.0"
 
 }
 
@@ -120,6 +120,7 @@ object WebWordsBuild extends Build {
                               SbtStartScript.stage in Compile := Unit
                             )) aggregate(common, web, indexer, message, mining, boilerpipe
       , demo
+      , restful
       )
 
     lazy val web = Project("webwords-web",
@@ -206,5 +207,14 @@ object WebWordsBuild extends Build {
         , nekohtml
         , opennlp
         , xerces))) dependsOn(boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test")
+
+  lazy val restful = Project("webwords-restful",
+    file("restful-service"),
+    settings = projectSettings ++
+      Seq(libraryDependencies ++= Seq(
+        actor
+        , fihttp
+      )))
+
 }
 
