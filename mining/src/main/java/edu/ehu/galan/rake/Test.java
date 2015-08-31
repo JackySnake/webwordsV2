@@ -1,11 +1,16 @@
 package edu.ehu.galan.rake;
 
+//import edu.ehu.galan.rake.model.Token;
+
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Created by joseph on 27/08/2015.
  */
 public class Test {
-    /*public static void main(String[] args) {
-        List<LinkedList<Token>> tokenizedSentenceList;
+    public static void main(String[] args) {
+        /*List<LinkedList<Token>> tokenizedSentenceList;
         List<String> sentenceList;
         POSTagger tagger = new POSTagger();
         Chunker chunker = new Chunker();
@@ -30,6 +35,6 @@ public class Test {
                 sentence = "";
             }
         }
-        parser.reset();
-    }*/
+        parser.reset();*/
+    }
 }
