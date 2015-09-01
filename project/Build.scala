@@ -107,9 +107,17 @@ object Dependencies {
 
   val mapper = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.13"
 
+  val finagle = "com.twitter" %% "finagle-core" % "6.28.0"
+
   val finchCore = "com.github.finagle" %% "finch-core" % "0.8.0"
 
   val argonaut = "com.github.finagle" %% "finch-argonaut" % "0.8.0"
+
+  val jackson = "com.github.finagle" %% "finch-jackson" % "0.8.0"
+
+  val json4s = "com.github.finagle" %% "finch-json4s" % "0.8.0"
+
+  val circe = "com.github.finagle" %% "finch-circe" % "0.8.0"
 }
 
 object WebWordsBuild extends Build {
@@ -224,6 +232,10 @@ object WebWordsBuild extends Build {
         , mapper
         , finchCore
         , argonaut
+        , jackson
+        , json4s
+        , circe
+        , finagle
       )))
 
 }
