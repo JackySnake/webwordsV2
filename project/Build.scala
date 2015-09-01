@@ -103,7 +103,13 @@ object Dependencies {
   val nekohtml = "net.sourceforge.nekohtml" % "nekohtml" % "1.9.13"
 
   val fihttp = "com.twitter" %% "finagle-http" % "6.28.0"
+  val fihttpx = "com.twitter" %% "finagle-httpx" % "6.28.0"
 
+  val mapper = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.13"
+
+  val finchCore = "com.github.finagle" %% "finch-core" % "0.8.0"
+
+  val argonaut = "com.github.finagle" %% "finch-argonaut" % "0.8.0"
 }
 
 object WebWordsBuild extends Build {
@@ -214,6 +220,10 @@ object WebWordsBuild extends Build {
       Seq(libraryDependencies ++= Seq(
         actor
         , fihttp
+        , fihttpx
+        , mapper
+        , finchCore
+        , argonaut
       )))
 
 }
