@@ -58,7 +58,7 @@ object ServerExample extends App {
           val message = write(ArticleContent(article))
 
           res.setContent(copiedBuffer(message, Utf8))
-
+          println("stop")
           res
         }
 
