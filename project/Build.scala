@@ -109,6 +109,10 @@ object Dependencies {
 
     val finatraHttp   = "com.twitter.finatra" %% "finatra-http" % "2.0.0.M2"
     val flogback      = "com.twitter.finatra" % "finatra-logback_2.10" % "2.0.0.M2"
+
+
+    val json4sNative = "org.json4s" %% "json4s-native" % "3.2.10"
+    val json4sJackson = "org.json4s" %% "json4s-jackson" % "3.2.10"
 }
 
 object WebWordsBuild extends Build {
@@ -230,6 +234,8 @@ object WebWordsBuild extends Build {
 //        , finatra
         , finatraHttp
 //        , flogback
+        , json4sNative
+        , json4sJackson
       ))) dependsOn(boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test")
 
 }
