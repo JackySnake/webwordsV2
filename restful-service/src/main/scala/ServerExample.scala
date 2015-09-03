@@ -34,7 +34,7 @@ object ServerExample extends App {
 
           val content = request.asInstanceOf[Request].getContentString()
 
-          val todo = Todos.fromJson(content, create = true)
+//          val todo = Todos.fromJson(content, create = true)
 
           println()
           val res = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK)
