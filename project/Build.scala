@@ -30,6 +30,7 @@ object BuildSettings {
 //          , ossrh
 //          , apache
           , twitter
+          , finatraRepo
         ))
 
 //  resolvers += Resolver.sonatypeRepo("snapshots"),
@@ -56,7 +57,9 @@ object Resolvers {
 
 //  val apache = "apache opennlp releases" at "https://repository.apache.org/content/repositories/releases/"
 
-    val twitter       = "Twitter" at "http://maven.twttr.com"
+    val twitter       = "Twitter maven" at "http://maven.twttr.com"
+
+    val finatraRepo = "Finatra Repo" at "http://twitter.github.com/finatra"
 }
 
 object Dependencies {
@@ -85,8 +88,8 @@ object Dependencies {
     val logging   = "com.typesafe.scala-logging" %%  "scala-logging-slf4j"      % "2.1.2"
     val config    = "com.typesafe" % "config" % "1.2.1"
     val rabbit    = "io.scalac" %% "reactive-rabbit" % "1.0.1"
-    val logbak    = "ch.qos.logback"  %   "logback-core"             % "1.1.2"
-    val logcore   = "ch.qos.logback" %   "logback-classic"          % "1.1.2"
+    val logcore    = "ch.qos.logback"  %   "logback-core"             % "1.1.3"
+    val logback   = "ch.qos.logback" %   "logback-classic"          % "1.1.3"
     val scalatest = "org.scalatest"              %%  "scalatest"                % "2.2.1" % "test"
     val gson      = "com.google.code.gson" % "gson" % "2.3.1"
     val commonsio = "commons-io" % "commons-io" % "2.4"
@@ -103,9 +106,9 @@ object Dependencies {
     val jackson   = "com.github.finagle" %% "finch-jackson" % "0.8.0"
     val json4s    = "com.github.finagle" %% "finch-json4s" % "0.8.0"
     val circe     = "com.github.finagle" %% "finch-circe" % "0.8.0"
-    val finatraHttp   = "com.twitter.finatra" %% "finatra-http" % "2.0.0.M2"
 
-    val  finatra = "com.twitter" %% "finatra" % "1.5.3"
+    val finatraHttp   = "com.twitter.finatra" %% "finatra-http" % "2.0.0.M2"
+    val flogback      = "com.twitter.finatra" % "finatra-logback_2.10" % "2.0.0.M2"
 }
 
 object WebWordsBuild extends Build {
@@ -149,8 +152,8 @@ object WebWordsBuild extends Build {
           actor
           , rabbit
           , logging
-          , logbak
           , logcore
+          , logback
           , scalatest
           , config
           , sse
@@ -163,8 +166,8 @@ object WebWordsBuild extends Build {
           actor
           , rabbit
           , logging
-          , logbak
           , logcore
+          , logback
           , scalatest
           , config
           , sse
@@ -181,8 +184,8 @@ object WebWordsBuild extends Build {
         actor
         , rabbit
         , logging
-        , logbak
         , logcore
+        , logback
         , scalatest
         , config
         , sse
@@ -199,8 +202,8 @@ object WebWordsBuild extends Build {
         actor
         , rabbit
         , logging
-        , logbak
         , logcore
+        , logback
         , scalatest
         , config
         , sse
@@ -224,9 +227,10 @@ object WebWordsBuild extends Build {
         , json4s
         , circe
         , finagle
-        , finatra
+//        , finatra
         , finatraHttp
-      )))
+//        , flogback
+      ))) dependsOn(boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test")
 
 }
 
