@@ -1,5 +1,8 @@
 package uk.ac.shef.dcs.jate;
 
+import opennlp.tools.postag.POSModel;
+
+import java.io.FileInputStream;
 import java.util.Properties;
 import java.io.InputStream;
 import java.io.IOException;
@@ -11,6 +14,8 @@ import java.io.IOException;
 public class JATEProperties {
     private Properties _properties = new Properties();
     private static JATEProperties _ref = null;
+
+    private static String pos_model_resource = null;
 
     //public static final String NP_FILTER_PATTERN = "[^a-zA-Z0-9\\-]";
     //replaced by the following var:
@@ -44,6 +49,14 @@ public class JATEProperties {
             _ref = new JATEProperties();
         }
         return _ref;
+    }
+
+    public String getPOSModelResource() {
+        if (pos_model_resource == null) {
+            InputStream in = getClass().getResourceAsStream("/jate.properties");
+            pos_model_resource = new FileInputStream(in);
+        }
+        return pos_model_resource;
     }
 
     private void read() {
