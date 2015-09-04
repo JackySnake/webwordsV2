@@ -1,11 +1,8 @@
 package uk.ac.shef.dcs.jate;
 
-import opennlp.tools.postag.POSModel;
-
-import java.io.FileInputStream;
-import java.util.Properties;
-import java.io.InputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 /**
  */
@@ -15,7 +12,15 @@ public class JATEProperties {
     private Properties _properties = new Properties();
     private static JATEProperties _ref = null;
 
-    private static String pos_model_resource = null;
+    private static InputStream posModelResource = null;
+    private static InputStream chunkerModelResource = null;
+    private static InputStream tokenizerModelResource = null;
+    private static InputStream sentenceModelResource = null;
+
+
+
+
+
 
     //public static final String NP_FILTER_PATTERN = "[^a-zA-Z0-9\\-]";
     //replaced by the following var:
@@ -51,12 +56,32 @@ public class JATEProperties {
         return _ref;
     }
 
-    public String getPOSModelResource() {
-        if (pos_model_resource == null) {
-            InputStream in = getClass().getResourceAsStream("/jate.properties");
-            pos_model_resource = new FileInputStream(in);
+    public InputStream getPOSModelResource() {
+        if (posModelResource == null) {
+            posModelResource = getClass().getResourceAsStream("/en-pos-maxent.bin");
         }
-        return pos_model_resource;
+        return posModelResource;
+    }
+
+    public InputStream getChunkerModelResource() {
+        if (chunkerModelResource == null) {
+            chunkerModelResource = getClass().getResourceAsStream("/en-chunker.bin");
+        }
+        return chunkerModelResource;
+    }
+
+    public InputStream getTokenizerModelResource() {
+        if (tokenizerModelResource == null) {
+            tokenizerModelResource = getClass().getResourceAsStream("/en-token.bin");
+        }
+        return tokenizerModelResource;
+    }
+
+    public InputStream getSentenceModelResource() {
+        if (sentenceModelResource == null) {
+            sentenceModelResource = getClass().getResourceAsStream("/en-sent.bin");
+        }
+        return sentenceModelResource;
     }
 
     private void read() {
