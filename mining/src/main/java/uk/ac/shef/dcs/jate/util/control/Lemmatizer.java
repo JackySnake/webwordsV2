@@ -2,8 +2,8 @@ package uk.ac.shef.dcs.jate.util.control;
 
 import net.didion.jwnl.JWNLException;
 import opennlp.tools.coref.mention.JWNLDictionary;
-import uk.ac.shef.dcs.jate.JATEProperties;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.StringTokenizer;
 import java.util.regex.Matcher;
@@ -127,7 +127,10 @@ public class Lemmatizer extends Normalizer {
 
 
 	private void init() throws IOException, JWNLException {
-		dict = new JWNLDictionary(JATEProperties.getInstance().getNLPPath()+"/wordnet_dict");
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("/jate.properties").getFile());
+
+		dict = new JWNLDictionary(file.getPath()+"/wordnet_dict");
 	}
 
 }
