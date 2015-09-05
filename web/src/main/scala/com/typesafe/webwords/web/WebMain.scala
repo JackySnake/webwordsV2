@@ -7,10 +7,10 @@ import com.typesafe.webwords.common._
  * Jetty web server which delegates all the work to Akka HTTP.
  */
 object WebMain extends App {
-    val config = WebWordsConfig()
+    /*val config = WebWordsConfig()
 
     val server = new WebServer(config)
     server.start()
     server.run()
-    server.stop()
+    server.stop()*/
 }

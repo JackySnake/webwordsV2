@@ -143,13 +143,13 @@ object WebWordsBuild extends Build {
     lazy val web = Project("webwords-web",
                            file("web"),
                            settings = projectSettings ++
-                           SbtStartScript.startScriptForClassesSettings ++
+//                           SbtStartScript.startScriptForClassesSettings ++
                            Seq(libraryDependencies ++= Seq(jettyServer, jettyServlet, slf4jSimple))) dependsOn(common % "compile->compile;test->test")
 
     lazy val indexer = Project("webwords-indexer",
                               file("indexer"),
                               settings = projectSettings ++
-                              SbtStartScript.startScriptForClassesSettings ++
+//                              SbtStartScript.startScriptForClassesSettings ++
                               Seq(libraryDependencies ++= Seq(jsoup))) dependsOn(common % "compile->compile;test->test")
 
     lazy val common = Project("webwords-common",

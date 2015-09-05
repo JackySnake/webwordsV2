@@ -8,5 +8,5 @@ import com.typesafe.webwords.common._
  * storing results in a persistent cache (kept in MongoDB).
  */
 object Main extends App {
-    val config = WebWordsConfig()
+//    val config = WebWordsConfig()
 }
