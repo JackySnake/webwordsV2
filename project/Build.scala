@@ -12,8 +12,6 @@ object BuildSettings {
     val buildVersion = "1.0"
     val buildScalaVersion = "2.10.4"
 
-    packageArchetype.java_application
-
     val globalSettings = Seq(
         herokuJdkVersion in Compile := "1.7",
         herokuAppName in Compile := "ssr-api",
@@ -24,7 +22,6 @@ object BuildSettings {
         scalacOptions += "-deprecation",
         fork in test := true,
         libraryDependencies ++= Seq(slf4jSimpleTest, scalatest, jettyServerTest),
-//      ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) },
         resolvers := Seq(jbossRepo
           , akkaRepo
           , sonatypeRepo
@@ -33,16 +30,9 @@ object BuildSettings {
           , typesafe
           , hseeberger
           , thenewmotion
-//          , ossrh
-//          , apache
           , twitter
           , finatraRepo
         ))
-
-//  resolvers += Resolver.sonatypeRepo("snapshots"),
-//  resolvers += Resolver.sonatypeRepo("releases")
-//
-//        resolvers += Classpaths.typesafeResolver
 
     val projectSettings = Defaults.defaultSettings ++ globalSettings
 }
@@ -71,8 +61,6 @@ object Resolvers {
 object Dependencies {
     val lib             = "org.scala-lang" % "scala-library" % "2.10.4"
 
-//    val scalatest = "org.scalatest" % "scalatest_2.10" % "2.2.5"
-
     val slf4jSimple     = "org.slf4j" % "slf4j-simple" % "1.6.2"
     val slf4jSimpleTest = slf4jSimple % "test"
 
@@ -86,9 +74,6 @@ object Dependencies {
     val casbahCore      = "org.mongodb" % "casbah-core_2.10" % "2.8.2"
     val actor           = "com.typesafe.akka" %% "akka-actor" % "2.3.7"
     val rabbitmq        = "com.thenewmotion.akka" %% "akka-rabbitmq" % "1.2.4"
-//    val stream    = "com.typesafe.akka" %%  "akka-stream-experimental" % "1.0"
-//      val httpCore  = "com.typesafe.akka" % "akka-http-core-experimental_2.10" % "1.0"
-//    val http      = "com.typesafe.akka" %% "akka-http-experimental" % "1.0"
 
     val sse       = "de.heikoseeberger" %% "akka-sse" % "1.0.0"
     val logging   = "com.typesafe.scala-logging" %%  "scala-logging-slf4j"      % "2.1.2"
@@ -123,10 +108,6 @@ object Dependencies {
 object WebWordsBuild extends Build {
     import BuildSettings._
     import Dependencies._
-    import Resolvers._
-
-
-//    herokuAppName in Compile := "your-heroku-app-name"
 
     override lazy val settings = super.settings ++ globalSettings
 
@@ -141,21 +122,43 @@ object WebWordsBuild extends Build {
       )
 
     lazy val web = Project("webwords-web",
-                           file("web"),
-                           settings = projectSettings ++
-//                           SbtStartScript.startScriptForClassesSettings ++
-                           Seq(libraryDependencies ++= Seq(jettyServer, jettyServlet, slf4jSimple))) dependsOn(common % "compile->compile;test->test")
+                            file("web"),
+                            settings = projectSettings ++
+                            SbtStartScript.startScriptForClassesSettings ++
+                            Seq(libraryDependencies ++= Seq(
+                              actor
+                              , fihttp
+                              , fihttpx
+                              , mapper
+                              , finchCore
+                              , argonaut
+                              , jackson
+                              , json4s
+                              , circe
+                              , finagle
+                              //        , finatra
+                              , finatraHttp
+                              //        , flogback
+                              , json4sNative
+                              , json4sJackson
+                            ))) dependsOn(common % "compile->compile;test->test"
+      , boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test")
 
     lazy val indexer = Project("webwords-indexer",
                               file("indexer"),
                               settings = projectSettings ++
-//                              SbtStartScript.startScriptForClassesSettings ++
+                              SbtStartScript.startScriptForClassesSettings ++
                               Seq(libraryDependencies ++= Seq(jsoup))) dependsOn(common % "compile->compile;test->test")
 
     lazy val common = Project("webwords-common",
                            file("common"),
                            settings = projectSettings ++
-                           Seq(libraryDependencies ++= Seq(asyncHttp, casbahCore)))
+                           Seq(libraryDependencies ++= Seq(asyncHttp
+                             , casbahCore
+                             , jackson
+                             , json4s
+                             , json4sNative
+                             , json4sJackson)))
 
     lazy val message = Project("webwords-message",
       file("rabbitmq-akka-stream"),
@@ -245,7 +248,8 @@ object WebWordsBuild extends Build {
   //        , flogback
           , json4sNative
           , json4sJackson
-        ))) dependsOn(boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test")
+        ))) dependsOn(common % "compile->compile;test->test"
+      , boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test")
 
 }
 

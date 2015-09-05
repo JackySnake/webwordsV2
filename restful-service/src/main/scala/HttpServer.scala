@@ -20,7 +20,7 @@ object HttpServer {
   /**
    * A simple Filter that catches exceptions and converts them to appropriate
    * HTTP responses.
-   */
+  /* */
   class HandleExceptions extends SimpleFilter[HttpRequest, HttpResponse] {
     def apply(request: HttpRequest, service: Service[HttpRequest, HttpResponse]) = {
 
@@ -78,5 +78,5 @@ object HttpServer {
       .bindTo(new InetSocketAddress(8080))
       .name("httpserver")
       .build(myService)
-  }
+  }*/
 }

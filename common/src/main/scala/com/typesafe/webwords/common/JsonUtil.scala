@@ -1,8 +1,10 @@
+package com.typesafe.webwords.common
+
 import org.json4s._
 
 object JsonUtil {
+  import java.io.{ByteArrayInputStream, InputStreamReader}
   import java.nio.charset.StandardCharsets.UTF_8
-  import java.io.{InputStreamReader, ByteArrayInputStream}
 
   def jValue(json: String): JValue = {
     jValue(json.getBytes(UTF_8))

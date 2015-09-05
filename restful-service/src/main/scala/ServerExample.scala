@@ -1,13 +1,11 @@
-import java.io.PrintWriter
-
-import com.kohlschutter.boilerpipe.BoilerpipeExtractor
-import com.kohlschutter.boilerpipe.extractors.{CommonExtractors, ArticleExtractor}
+import com.kohlschutter.boilerpipe.extractors.{CommonExtractors}
 import com.kohlschutter.boilerpipe.sax.HTMLHighlighter
 import com.ssreader.service.model.{ArticleContent, ArticleLink}
 import com.twitter.finagle.Service
 import com.twitter.finagle.http.{Request, Http}
 import com.twitter.io.Charsets._
 import com.twitter.util.Future
+import com.typesafe.webwords.common.JsonUtil
 import org.jboss.netty.buffer.ChannelBuffers._
 import org.jboss.netty.handler.codec.http._
 import java.net.{URL, SocketAddress, InetSocketAddress}

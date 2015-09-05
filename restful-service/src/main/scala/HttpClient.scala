@@ -14,7 +14,7 @@ import com.twitter.util.Future
  * are closed.
  */
 object HttpClient {
-  class InvalidRequest extends Exception
+  /*class InvalidRequest extends Exception
 
   /**
    * Convert HTTP 4xx and 5xx class responses into Exceptions.
@@ -74,5 +74,5 @@ object HttpClient {
     client(unauthorizedRequest) onFailure { error =>
       println("))) Unauthorized request errored (as desired): " + error.getClass.getName)
     }
-  }
+  }*/
 }
