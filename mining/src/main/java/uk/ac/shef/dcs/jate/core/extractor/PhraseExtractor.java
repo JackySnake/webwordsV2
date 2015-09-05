@@ -79,9 +79,9 @@ public class PhraseExtractor {
                     continue;
                 }
                 wordCounter++;
-			    
+
 			    /*To handle the case of two consecutive sentences such as: ...using FAST. Display the content... 
-			     * Here, tokenizer recognizes 'FAST.' as a token and 'Display' as another token ie, it fails to recognize 'FAST' and '.' as two different tokens.. 
+                 * Here, tokenizer recognizes 'FAST.' as a token and 'Display' as another token ie, it fails to recognize 'FAST' and '.' as two different tokens..
 			     * Thus, while generating the candidates, it is to made sure that 'Display' and 'FAST' are in two different candidates as a full stop appears in between them in the corpus.
 			     * */
 

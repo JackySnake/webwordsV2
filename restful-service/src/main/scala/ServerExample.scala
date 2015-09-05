@@ -39,26 +39,28 @@ object ServerExample extends App {
           val valueJson = JsonUtil.jValue(jsonContent)
           val link: ArticleLink = (defaultsJson merge valueJson).extract[ArticleLink]
 
-          val res = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK)
+          val url: URL = new URL(link.link)
 
 //          val message = "{\"message\": \"A friend of mine led his company from nothing to over $1 billion in revenue in record time by relentlessly pursuing his product vision. He did so by intimately involving himself in the intricate details of his company’s product planning and execution. This worked brilliantly up to about 500 employees. Then, as the company continued to scale, things started to degenerate. He went from being the visionary product founder who kept cohesion and context across and increasingly complex product line to the seemingly arbitrary decision maker and product bottleneck. This frustrated employees and slowed development. In reaction to that problem and to help the company scale, he backed off and started delegating all the major product decisions and direction to the team. And then he ran smack into the Product CEO Paradox: The only thing that will wreck a company faster than the product CEO being highly engaged in the product is the product CEO disengaging from the product.\"}"
 
 //          val url: URL = new URL("http://www.npr.org/sections/health-shots/2013/10/18/236211811/brains-sweep-themselves-clean-of-toxins-during-sleep")
 
-          val url: URL = new URL(link.link)
-
           //  System.out.println(ArticleExtractor.INSTANCE.getText(url))
           val article = ArticleExtractor.INSTANCE.getText(url)
 
           val document = new InMemoryDocument(article);
+
           val extraction = new KeywordExtraction(document);
           val terms: Array[Term] = extraction.extractKeywords();
-          terms.foreach(x => println("sdlfsdfj %s %s", x.getConcept, x.getConfidence))
+
+          terms.take(10).foreach(x => println("sdlfsdfj %s %s", x.getConcept, x.getConfidence))
 
           val message = write(ArticleContent(article))
 
+          val res = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK)
+
           res.setContent(copiedBuffer(message, Utf8))
-          println("stop")
+
           res
         }
 
