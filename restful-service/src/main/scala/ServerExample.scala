@@ -52,7 +52,7 @@ object ServerExample extends App {
           val document = new InMemoryDocument(article);
           val extraction = new KeywordExtraction(document);
           val terms: Array[Term] = extraction.extractKeywords();
-          terms.take(10).foreach(x => println("sdlfsdfj %s %s", x.getConcept, x.getConfidence))
+          terms.take(10).foreach(x => println("%s %s", x.getConcept, x.getConfidence))
 
           // choose the operation mode (i.e., highlighting or extraction)
           val hh = HTMLHighlighter.newExtractingInstance()

@@ -1,6 +1,8 @@
+import com.typesafe.sbt.SbtNativePackager.packageArchetype
 import sbt._
 import Keys._
 import com.typesafe.sbt.SbtStartScript
+import com.heroku.sbt.HerokuPlugin.autoImport._
 
 object BuildSettings {
     import Dependencies._
@@ -10,7 +12,11 @@ object BuildSettings {
     val buildVersion = "1.0"
     val buildScalaVersion = "2.10.4"
 
+    packageArchetype.java_application
+
     val globalSettings = Seq(
+        herokuJdkVersion in Compile := "1.7",
+        herokuAppName in Compile := "ssr-api",
         organization := buildOrganization,
         version := buildVersion,
         scalaVersion := buildScalaVersion,
@@ -110,7 +116,6 @@ object Dependencies {
     val finatraHttp   = "com.twitter.finatra" %% "finatra-http" % "2.0.0.M2"
     val flogback      = "com.twitter.finatra" % "finatra-logback_2.10" % "2.0.0.M2"
 
-
     val json4sNative = "org.json4s" %% "json4s-native" % "3.2.10"
     val json4sJackson = "org.json4s" %% "json4s-jackson" % "3.2.10"
 }
@@ -119,6 +124,9 @@ object WebWordsBuild extends Build {
     import BuildSettings._
     import Dependencies._
     import Resolvers._
+
+
+//    herokuAppName in Compile := "your-heroku-app-name"
 
     override lazy val settings = super.settings ++ globalSettings
 
