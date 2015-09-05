@@ -225,27 +225,27 @@ object WebWordsBuild extends Build {
         , opennlp
         , xerces))) dependsOn(boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test")
 
-  lazy val restful = Project("webwords-restful",
-    file("restful-service"),
-    settings = projectSettings ++
-      SbtStartScript.startScriptForClassesSettings ++
-      Seq(libraryDependencies ++= Seq(
-        actor
-        , fihttp
-        , fihttpx
-        , mapper
-        , finchCore
-        , argonaut
-        , jackson
-        , json4s
-        , circe
-        , finagle
-//        , finatra
-        , finatraHttp
-//        , flogback
-        , json4sNative
-        , json4sJackson
-      ))) dependsOn(boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test")
+    lazy val restful = Project("webwords-restful",
+      file("restful-service"),
+      settings = projectSettings ++
+        SbtStartScript.startScriptForClassesSettings ++
+        Seq(libraryDependencies ++= Seq(
+          actor
+          , fihttp
+          , fihttpx
+          , mapper
+          , finchCore
+          , argonaut
+          , jackson
+          , json4s
+          , circe
+          , finagle
+  //        , finatra
+          , finatraHttp
+  //        , flogback
+          , json4sNative
+          , json4sJackson
+        ))) dependsOn(boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test")
 
 }
 
