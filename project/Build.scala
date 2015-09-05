@@ -228,6 +228,7 @@ object WebWordsBuild extends Build {
   lazy val restful = Project("webwords-restful",
     file("restful-service"),
     settings = projectSettings ++
+      SbtStartScript.startScriptForClassesSettings ++
       Seq(libraryDependencies ++= Seq(
         actor
         , fihttp
