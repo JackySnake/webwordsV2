@@ -18,12 +18,8 @@
 package com.kohlschutter.boilerpipe.demo;
 
 import com.kohlschutter.boilerpipe.BoilerpipeExtractor;
-import com.kohlschutter.boilerpipe.document.TextDocument;
 import com.kohlschutter.boilerpipe.extractors.CommonExtractors;
-import com.kohlschutter.boilerpipe.sax.BoilerpipeSAXInput;
-import com.kohlschutter.boilerpipe.sax.HTMLFetcher;
 import com.kohlschutter.boilerpipe.sax.HTMLHighlighter;
-import org.xml.sax.InputSource;
 
 import java.io.PrintWriter;
 import java.net.URL;
@@ -33,30 +29,23 @@ import java.net.URL;
  * 
  * @see Oneliner if you only need the plain text.
  */
-public class HTMLHighlightDemo {
+public class LargestHTMLHighlightDemo {
   public static void main(String[] args) throws Exception {
     URL url =
         new URL(
             "http://www.npr.org/sections/health-shots/2013/10/18/236211811/brains-sweep-themselves-clean-of-toxins-during-sleep");
 
-//      final InputSource is = HTMLFetcher.fetch(url).toInputSource();
-//
-//      final BoilerpipeSAXInput in = new BoilerpipeSAXInput(is);
-//      final TextDocument doc = in.getTextDocument();
-
     // choose from a set of useful BoilerpipeExtractors...
     final BoilerpipeExtractor extractor = CommonExtractors.ARTICLE_EXTRACTOR;
 
-
-//    System.out.println(extractor.getText(doc));
-
     // final BoilerpipeExtractor extractor = CommonExtractors.DEFAULT_EXTRACTOR;
     // final BoilerpipeExtractor extractor = CommonExtractors.CANOLA_EXTRACTOR;
-    // final BoilerpipeExtractor extractor = CommonExtractors.LARGEST_CONTENT_EXTRACTOR;
+//     final BoilerpipeExtractor extractor = CommonExtractors.LARGEST_CONTENT_EXTRACTOR;
 
     // choose the operation mode (i.e., highlighting or extraction)
-    final HTMLHighlighter hh = HTMLHighlighter.newHighlightingInstance();
-    hh.setOutputHighlightOnly(true);
+    final HTMLHighlighter hh = HTMLHighlighter.newExtractingInstance();
+//    hh.setIgnoreHighlight(true);
+//    hh.setOutputHighlightOnly(true);
     // final HTMLHighlighter hh = HTMLHighlighter.newExtractingInstance();
 
     PrintWriter out = new PrintWriter("/tmp/highlighted.html", "UTF-8");
