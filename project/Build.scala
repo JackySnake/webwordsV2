@@ -226,8 +226,8 @@ object WebWordsBuild extends Build {
         , xerces))) dependsOn(boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test")
 
     lazy val restful = Project("webwords-restful",
-      file("restful-service"),
-      settings = projectSettings ++
+        file("restful-service"),
+        settings = projectSettings ++
         SbtStartScript.startScriptForClassesSettings ++
         Seq(libraryDependencies ++= Seq(
           actor

@@ -79,7 +79,7 @@ object ServerExample extends App {
   }
 
   // Serve our service on a port
-  val address: SocketAddress = new InetSocketAddress(80)
+  val address: SocketAddress = new InetSocketAddress(10001)
 
   val server: Server = ServerBuilder()
     .codec(Http())
