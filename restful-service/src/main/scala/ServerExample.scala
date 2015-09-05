@@ -79,7 +79,8 @@ object ServerExample extends App {
   }
 
   // Serve our service on a port
-  val address: SocketAddress = new InetSocketAddress(10001)
+  val address: SocketAddress = new InetSocketAddress("ssr-api.herokuapp.com", 80)
+
   val server: Server = ServerBuilder()
     .codec(Http())
     .bindTo(address)
