@@ -1,11 +1,13 @@
-/*import java.net.{InetSocketAddress, SocketAddress, URL}
+import java.net.{InetSocketAddress, SocketAddress, URL}
 
 import com.kohlschutter.boilerpipe.extractors.CommonExtractors
 import com.kohlschutter.boilerpipe.sax.HTMLHighlighter
 import com.ssreader.service.model.{ArticleContent, ArticleLink}
 import com.twitter.finagle.Service
 import com.twitter.finagle.builder.{Server, ServerBuilder}
-//import com.twitter.finagle.http.{Http, Request}
+//import com.twitter.finagle.httpx.{Request, Http}
+
+import com.twitter.finagle.http.{Http, Request}
 import com.twitter.io.Charsets._
 import com.twitter.util.Future
 import com.typesafe.webwords.common.JsonUtil
@@ -14,7 +16,7 @@ import org.jboss.netty.handler.codec.http._
 import org.json4s.native.Serialization.write
 import org.json4s.{DefaultFormats, _}
 import uk.ac.shef.dcs.jate.model.{InMemoryDocument, Term}
-import uk.ac.shef.dcs.jate.processing.KeywordExtraction*/
+import uk.ac.shef.dcs.jate.processing.KeywordExtraction
 
 /**
  * This is the main() object for the web process. It starts up an embedded
@@ -22,8 +24,9 @@ import uk.ac.shef.dcs.jate.processing.KeywordExtraction*/
  */
 object WebMain extends App {
   // Define our service: OK response for root, 404 for other paths
-  /*val rootService = new Service[HttpRequest, HttpResponse] {
+  val rootService = new Service[HttpRequest, HttpResponse] {
     def apply(request: HttpRequest) = {
+
       val r = request.getUri match {
         case "/api/read" => {
           println("=============>>>>>>")
@@ -82,5 +85,5 @@ object WebMain extends App {
     .codec(Http())
     .bindTo(address)
     .name("HttpServer")
-    .build(rootService)*/
+    .build(rootService)
 }

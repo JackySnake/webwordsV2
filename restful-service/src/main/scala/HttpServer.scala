@@ -1,4 +1,4 @@
-import org.jboss.netty.handler.codec.http.{HttpRequest, HttpResponse}
+/*import org.jboss.netty.handler.codec.http.{HttpRequest, HttpResponse}
 import com.twitter.finagle.{Service, SimpleFilter}
 import org.jboss.netty.handler.codec.http._
 import org.jboss.netty.handler.codec.http.HttpResponseStatus._
@@ -8,7 +8,7 @@ import com.twitter.io.Charsets.Utf8
 import com.twitter.util.Future
 import java.net.InetSocketAddress
 import com.twitter.finagle.builder.{Server, ServerBuilder}
-import com.twitter.finagle.http.Http
+import com.twitter.finagle.http.Http*/
 
 /**
  * This example demonstrates a sophisticated HTTP server that handles exceptions

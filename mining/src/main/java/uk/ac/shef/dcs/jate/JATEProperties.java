@@ -17,11 +17,6 @@ public class JATEProperties {
     private static InputStream tokenizerModelResource = null;
     private static InputStream sentenceModelResource = null;
 
-
-
-
-
-
     //public static final String NP_FILTER_PATTERN = "[^a-zA-Z0-9\\-]";
     //replaced by the following var:
     public static final String TERM_CLEAN_PATTERN = "[^a-zA-Z0-9\\-]";
