@@ -93,7 +93,7 @@ object Main extends App {
     .build(rootService)*/
 
   println("Starting server ... it works")
-  val server = Httpx.serve(":8088", rootService)
+  val server = Httpx.serve(":8080", rootService)
   Await.ready(server)
 
   //HTTP endpoint
