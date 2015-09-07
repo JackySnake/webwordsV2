@@ -59,7 +59,7 @@ object Dependencies {
     val jettyServlet    = "org.eclipse.jetty" % "jetty-servlet" % jettyVersion
     val jettyServerTest = jettyServer % "test"
 
-    val asyncHttp       = "com.ning" % "async-http-client" % "1.6.5" exclude("org.jboss.netty", "netty")
+    val asyncHttp       = "com.ning" % "async-http-client" % "1.6.5" exclude("org.jboss.netty", "netty") exclude("org.slf4j", "slf4j-api")
     val jsoup           = "org.jsoup" % "jsoup" % "1.6.1"
     val casbahCore      = "org.mongodb" % "casbah-core_2.10" % "2.8.2"
     val actor           = "com.typesafe.akka" %% "akka-actor" % "2.3.7"
@@ -82,17 +82,9 @@ object Dependencies {
     val fihttpx   = "com.twitter" %% "finagle-httpx" % "6.28.0"
     val mapper    = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.13"
     val finagle   = "com.twitter" %% "finagle-core" % "6.28.0"
-    val finchCore = "com.github.finagle" %% "finch-core" % "0.8.0"
-    val argonaut  = "com.github.finagle" %% "finch-argonaut" % "0.8.0"
-    val jackson   = "com.github.finagle" %% "finch-jackson" % "0.8.0"
-    val json4s    = "com.github.finagle" %% "finch-json4s" % "0.8.0"
-    val circe     = "com.github.finagle" %% "finch-circe" % "0.8.0"
 
-    val finatraHttp   = "com.twitter.finatra" %% "finatra-http" % "2.0.0.M2"
-    val flogback      = "com.twitter.finatra" % "finatra-logback_2.10" % "2.0.0.M2"
-
-    val json4sNative = "org.json4s" %% "json4s-native" % "3.2.10"
-    val json4sJackson = "org.json4s" %% "json4s-jackson" % "3.2.10"
+    val json4sNative = "org.json4s" %% "json4s-native" % "3.2.11"
+    val json4sJackson = "org.json4s" %% "json4s-jackson" % "3.2.11" exclude("com.fasterxml.jackson.core", "jackson-databind")
 }
 
 object WebWordsBuild extends Build {
@@ -107,8 +99,8 @@ object WebWordsBuild extends Build {
                             Seq(
                               SbtStartScript.stage in Compile := Unit
                             )) aggregate(common, web, indexer, message, mining, boilerpipe
-      , demo
-      , restful
+                            , demo
+                            , restful
       ) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
     lazy val web = Project("webwords-web",
@@ -120,15 +112,7 @@ object WebWordsBuild extends Build {
                               , fihttp
                               , fihttpx
                               , mapper
-                              , finchCore
-                              , argonaut
-                              , jackson
-                              , json4s
-                              , circe
                               , finagle
-                              //        , finatra
-                              , finatraHttp
-                              //        , flogback
                               , json4sNative
                               , json4sJackson
                             ))) dependsOn(common % "compile->compile;test->test"
@@ -148,9 +132,6 @@ object WebWordsBuild extends Build {
                            settings = projectSettings ++
                            Seq(libraryDependencies ++= Seq(
                              asyncHttp
-//                             , casbahCore
-//                             , jackson
-                             , json4s
                              , json4sNative
                              , json4sJackson
                            ))) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
@@ -224,8 +205,8 @@ object WebWordsBuild extends Build {
         , opennlp
         , xerces
       ))) dependsOn(boilerpipe % "compile->compile;test->test"
-    , mining % "compile->compile;test->test"
-    ) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
+        , mining % "compile->compile;test->test"
+      ) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
     lazy val restful = Project("webwords-restful",
         file("restful-service"),
@@ -236,21 +217,13 @@ object WebWordsBuild extends Build {
           , fihttp
           , fihttpx
           , mapper
-          , finchCore
-          , argonaut
-          , jackson
-          , json4s
-          , circe
           , finagle
-  //        , finatra
-          , finatraHttp
-  //        , flogback
-          , json4sNative
-          , json4sJackson
+//          , json4sNative
+//          , json4sJackson
         ))) dependsOn(common % "compile->compile;test->test"
-      , boilerpipe % "compile->compile;test->test"
-      , mining % "compile->compile;test->test"
-      ) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
+          , boilerpipe % "compile->compile;test->test"
+          , mining % "compile->compile;test->test"
+        ) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
 }
 
