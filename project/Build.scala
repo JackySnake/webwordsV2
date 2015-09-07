@@ -100,7 +100,7 @@ object WebWordsBuild extends Build {
                             file("."),
                             settings = projectSettings ++
                             Seq(
-                              SbtStartScript.stage in Compile := Unit
+                              SbtStartScript.stage in (Compile, run) := Unit
                             )) aggregate(common, web, indexer, message, mining, boilerpipe
                             , demo
                             , restful
