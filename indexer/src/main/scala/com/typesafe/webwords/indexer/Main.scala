@@ -1,6 +1,7 @@
 package com.typesafe.webwords.indexer
 
 import java.net.{InetSocketAddress, SocketAddress, URL}
+import util.Properties
 
 import com.kohlschutter.boilerpipe.extractors.CommonExtractors
 import com.kohlschutter.boilerpipe.sax.HTMLHighlighter
@@ -93,7 +94,11 @@ object Main extends App {
     .build(rootService)*/
 
   println("Starting server ... it works")
-  val server = Httpx.serve(":8080", rootService)
+
+  val port = Properties.envOrElse("PORT", "8080").toInt
+  println("Starting on port:" + port)
+
+  val server = Httpx.serve(":" + port, rootService)
   Await.ready(server)
 
   //HTTP endpoint
