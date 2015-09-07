@@ -1,2 +1,1 @@
-web: web/target/start
-indexer: indexer/target/start
+indexer: indexer/target/start Main
