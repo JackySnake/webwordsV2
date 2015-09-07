@@ -108,15 +108,12 @@ object WebWordsBuild extends Build {
                             settings = projectSettings ++
                             SbtStartScript.startScriptForClassesSettings ++
                             Seq(libraryDependencies ++= Seq(
-                              actor
-                              , fihttp
+                              finagle
                               , fihttpx
-                              , mapper
-                              , finagle
-                              , json4sNative
-                              , json4sJackson
                             ))) dependsOn(common % "compile->compile;test->test"
-      , boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test") settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
+                              , boilerpipe % "compile->compile;test->test"
+                              , mining % "compile->compile;test->test"
+                            ) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
     lazy val indexer = Project("webwords-indexer",
                             file("indexer"),
