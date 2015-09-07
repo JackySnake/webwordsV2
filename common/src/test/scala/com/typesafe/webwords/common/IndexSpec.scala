@@ -1,8 +1,6 @@
 package com.typesafe.webwords.common
 
-import org.scalatest.matchers._
 import org.scalatest._
-import akka.actor._
 
 class IndexSpec extends FlatSpec with ShouldMatchers {
     private val sampleIndex = Index(

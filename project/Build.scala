@@ -38,29 +38,19 @@ object BuildSettings {
 }
 
 object Resolvers {
-    val sonatypeRepo  = "Sonatype Release" at "http://oss.sonatype.org/content/repositories/releases"
-    val snapshots     = "snapshots"           at "http://oss.sonatype.org/content/repositories/snapshots"
-    val jbossRepo     = "JBoss" at "http://repository.jboss.org/nexus/content/groups/public/"
-
-    val akkaRepo      = "Akka" at "http://repo.akka.io/repository/"
-    val releases      = "releases"            at "http://oss.sonatype.org/content/repositories/releases"
-    val typesafe      = "Typesafe Repository" at "http://repo.typesafe.com/typesafe/releases/"
-    val hseeberger    = "hseeberger at bintray" at "http://dl.bintray.com/hseeberger/maven"
-
-    val thenewmotion  = "The New Motion Public Repo" at "http://nexus.thenewmotion.com/content/groups/public/"
-
-//  val ossrh = "NLP" at "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
-
-//  val apache = "apache opennlp releases" at "https://repository.apache.org/content/repositories/releases/"
-
-    val twitter       = "Twitter maven" at "http://maven.twttr.com"
-
-    val finatraRepo = "Finatra Repo" at "http://twitter.github.com/finatra"
+    val sonatypeRepo  = "Sonatype Release"            at "http://oss.sonatype.org/content/repositories/releases"
+    val snapshots     = "snapshots"                   at "http://oss.sonatype.org/content/repositories/snapshots"
+    val jbossRepo     = "JBoss"                       at "http://repository.jboss.org/nexus/content/groups/public/"
+    val akkaRepo      = "Akka"                        at "http://repo.akka.io/repository/"
+    val releases      = "releases"                    at "http://oss.sonatype.org/content/repositories/releases"
+    val typesafe      = "Typesafe Repository"         at "http://repo.typesafe.com/typesafe/releases/"
+    val hseeberger    = "hseeberger at bintray"       at "http://dl.bintray.com/hseeberger/maven"
+    val thenewmotion  = "The New Motion Public Repo"  at "http://nexus.thenewmotion.com/content/groups/public/"
+    val twitter       = "Twitter maven"               at "http://maven.twttr.com"
+    val finatraRepo   = "Finatra Repo"                at "http://twitter.github.com/finatra"
 }
 
 object Dependencies {
-    val lib             = "org.scala-lang" % "scala-library" % "2.10.4"
-
     val slf4jSimple     = "org.slf4j" % "slf4j-simple" % "1.6.2"
     val slf4jSimpleTest = slf4jSimple % "test"
 
@@ -69,7 +59,7 @@ object Dependencies {
     val jettyServlet    = "org.eclipse.jetty" % "jetty-servlet" % jettyVersion
     val jettyServerTest = jettyServer % "test"
 
-    val asyncHttp       = "com.ning" % "async-http-client" % "1.6.5"
+    val asyncHttp       = "com.ning" % "async-http-client" % "1.6.5" exclude("org.jboss.netty", "netty")
     val jsoup           = "org.jsoup" % "jsoup" % "1.6.1"
     val casbahCore      = "org.mongodb" % "casbah-core_2.10" % "2.8.2"
     val actor           = "com.typesafe.akka" %% "akka-actor" % "2.3.7"
@@ -119,7 +109,7 @@ object WebWordsBuild extends Build {
                             )) aggregate(common, web, indexer, message, mining, boilerpipe
       , demo
       , restful
-      )
+      ) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
     lazy val web = Project("webwords-web",
                             file("web"),
@@ -142,37 +132,43 @@ object WebWordsBuild extends Build {
                               , json4sNative
                               , json4sJackson
                             ))) dependsOn(common % "compile->compile;test->test"
-      , boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test")
+      , boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test") settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
     lazy val indexer = Project("webwords-indexer",
-                              file("indexer"),
-                              settings = projectSettings ++
-                              SbtStartScript.startScriptForClassesSettings ++
-                              Seq(libraryDependencies ++= Seq(jsoup))) dependsOn(common % "compile->compile;test->test")
+                            file("indexer"),
+                            settings = projectSettings ++
+                            SbtStartScript.startScriptForClassesSettings ++
+                            Seq(libraryDependencies ++= Seq(
+                              jsoup
+                            ))) dependsOn(common % "compile->compile;test->test"
+                            ) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
     lazy val common = Project("webwords-common",
                            file("common"),
                            settings = projectSettings ++
-                           Seq(libraryDependencies ++= Seq(asyncHttp
-                             , casbahCore
-                             , jackson
+                           Seq(libraryDependencies ++= Seq(
+                             asyncHttp
+//                             , casbahCore
+//                             , jackson
                              , json4s
                              , json4sNative
-                             , json4sJackson)))
+                             , json4sJackson
+                           ))) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
     lazy val message = Project("webwords-message",
-      file("rabbitmq-akka-stream"),
-      settings = projectSettings ++
-        Seq(libraryDependencies ++= Seq(
-          actor
-          , rabbit
-          , logging
-          , logcore
-          , logback
-          , scalatest
-          , config
-          , sse
-          , rabbitmq)))
+                          file("rabbitmq-akka-stream"),
+                          settings = projectSettings ++
+                            Seq(libraryDependencies ++= Seq(
+                              actor
+                              , rabbit
+                              , logging
+                              , logcore
+                              , logback
+                              , scalatest
+                              , config
+                              , sse
+                              , rabbitmq
+                            ))) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
     lazy val mining = Project("webwords-mining",
       file("mining"),
@@ -190,7 +186,7 @@ object WebWordsBuild extends Build {
           , gson
           , commonsio
           , opennlp
-          , jwnl)))
+          , jwnl))) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
   lazy val boilerpipe = Project("webwords-boilerpipe-common",
     file("boilerpipe-common"),
@@ -208,7 +204,7 @@ object WebWordsBuild extends Build {
         , gson
         , nekohtml
         , opennlp
-        , xerces)))
+        , xerces))) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
   lazy val demo = Project("webwords-demo",
     file("demo"),
@@ -226,7 +222,10 @@ object WebWordsBuild extends Build {
         , gson
         , nekohtml
         , opennlp
-        , xerces))) dependsOn(boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test")
+        , xerces
+      ))) dependsOn(boilerpipe % "compile->compile;test->test"
+    , mining % "compile->compile;test->test"
+    ) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
     lazy val restful = Project("webwords-restful",
         file("restful-service"),
@@ -249,7 +248,9 @@ object WebWordsBuild extends Build {
           , json4sNative
           , json4sJackson
         ))) dependsOn(common % "compile->compile;test->test"
-      , boilerpipe % "compile->compile;test->test", mining % "compile->compile;test->test")
+      , boilerpipe % "compile->compile;test->test"
+      , mining % "compile->compile;test->test"
+      ) settings(net.virtualvoid.sbt.graph.Plugin.graphSettings: _*)
 
 }
 
