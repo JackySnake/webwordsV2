@@ -1,1 +1,1 @@
-indexer: ../indexer/target/universal/bin/webwords-indexer
+web: indexer/target/universal/stage/bin/webwords-indexer
