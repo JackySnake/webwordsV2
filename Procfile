@@ -1,1 +1,1 @@
-restful-service: restful-service/target/start
+web: web/target/start
