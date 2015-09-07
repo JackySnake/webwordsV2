@@ -1,7 +1,7 @@
-import com.typesafe.sbt.SbtNativePackager.packageArchetype
+//import com.typesafe.sbt.SbtNativePackager.packageArchetype
 import sbt._
 import Keys._
-import com.typesafe.sbt.{SbtNativePackager, SbtStartScript}
+import com.typesafe.sbt.{SbtNativePackager}
 import com.heroku.sbt.HerokuPlugin.autoImport._
 
 object BuildSettings {
@@ -100,28 +100,28 @@ object WebWordsBuild extends Build {
                             file("."),
                             settings = projectSettings ++
                             Seq(
-                              SbtStartScript.stage in (Compile, run) := Unit
+//                              SbtStartScript.stage in Compile := Unit
                             )) aggregate(common, web, indexer, message, mining, boilerpipe
                             , demo
                             , restful
-      ) settings(graphSettings: _*) enablePlugins(SbtNativePackager)
+      ) settings(graphSettings: _*) enablePlugins(SbtNativePackager) settings(com.typesafe.sbt.SbtNativePackager.packageArchetype.java_application: _*)
 
     lazy val web = Project("webwords-web",
                             file("web"),
                             settings = projectSettings ++
-                            SbtStartScript.startScriptForClassesSettings ++
+//                            SbtStartScript.startScriptForClassesSettings ++
                             Seq(libraryDependencies ++= Seq(
                               finagle
                               , fihttpx
                             ))) dependsOn(common % "compile->compile;test->test"
                               , boilerpipe % "compile->compile;test->test"
                               , mining % "compile->compile;test->test"
-                            ) settings(graphSettings: _*) enablePlugins(SbtNativePackager)
+                            ) settings(graphSettings: _*) enablePlugins(SbtNativePackager) settings(com.typesafe.sbt.SbtNativePackager.packageArchetype.java_application: _*)
 
     lazy val indexer = Project("webwords-indexer",
                             file("indexer"),
                             settings = projectSettings ++
-                            SbtStartScript.startScriptForClassesSettings ++
+//                            SbtStartScript.startScriptForClassesSettings ++
                             Seq(libraryDependencies ++= Seq(
                               jsoup
                               ,finagle
@@ -129,7 +129,7 @@ object WebWordsBuild extends Build {
                             ))) dependsOn(common % "compile->compile;test->test"
                               , boilerpipe % "compile->compile;test->test"
                               , mining % "compile->compile;test->test"
-                              ) settings(graphSettings: _*) enablePlugins(SbtNativePackager)
+                              ) settings(graphSettings: _*) enablePlugins(SbtNativePackager) settings(com.typesafe.sbt.SbtNativePackager.packageArchetype.java_application: _*)
 
     lazy val common = Project("webwords-common",
                            file("common"),
@@ -215,7 +215,7 @@ object WebWordsBuild extends Build {
     lazy val restful = Project("webwords-restful",
         file("restful-service"),
         settings = projectSettings ++
-        SbtStartScript.startScriptForClassesSettings ++
+//        SbtStartScript.startScriptForClassesSettings ++
         Seq(libraryDependencies ++= Seq(
           actor
           , fihttp
@@ -227,7 +227,7 @@ object WebWordsBuild extends Build {
         ))) dependsOn(common % "compile->compile;test->test"
           , boilerpipe % "compile->compile;test->test"
           , mining % "compile->compile;test->test"
-        ) settings(graphSettings: _*) enablePlugins(SbtNativePackager)
+        ) settings(graphSettings: _*) enablePlugins(SbtNativePackager) settings(com.typesafe.sbt.SbtNativePackager.packageArchetype.java_application: _*)
 
 }
 

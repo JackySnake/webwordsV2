@@ -1,2 +1,1 @@
-indexer: sh indexer/target/start
-web: web/target/start
+indexer: ../indexer/target/universal/bin/webwords-indexer
