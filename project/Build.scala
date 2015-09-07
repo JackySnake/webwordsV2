@@ -124,8 +124,12 @@ object WebWordsBuild extends Build {
                             SbtStartScript.startScriptForClassesSettings ++
                             Seq(libraryDependencies ++= Seq(
                               jsoup
+                              ,finagle
+                              , fihttpx
                             ))) dependsOn(common % "compile->compile;test->test"
-                            ) settings(graphSettings: _*) enablePlugins(SbtNativePackager)
+                              , boilerpipe % "compile->compile;test->test"
+                              , mining % "compile->compile;test->test"
+                              ) settings(graphSettings: _*) enablePlugins(SbtNativePackager)
 
     lazy val common = Project("webwords-common",
                            file("common"),

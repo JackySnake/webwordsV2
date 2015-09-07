@@ -8,7 +8,6 @@ import com.ssreader.service.model.{ArticleContent, ArticleLink}
 import com.twitter.finagle.{Httpx, Service}
 import com.twitter.finagle.httpx.{Status, Response, Request}
 
-import com.twitter.io.Charsets._
 import com.twitter.util.{Await, Future}
 import com.typesafe.webwords.common.JsonUtil
 import org.json4s.native.Serialization.write
