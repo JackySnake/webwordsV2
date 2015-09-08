@@ -20,7 +20,11 @@ object BuildSettings {
         crossScalaVersions := Seq("2.10.2", "2.10.3", "2.10.4", "2.10.5", "2.11.0", "2.11.1", "2.11.2", "2.11.3", "2.11.4", "2.11.5", "2.11.6", "2.11.7"),
         scalacOptions += "-deprecation",
         fork in test := true,
-        libraryDependencies ++= Seq(slf4jSimpleTest, scalatest, jettyServerTest),
+        libraryDependencies ++= Seq(
+          slf4jSimpleTest,
+          scalatest
+//          , jettyServerTest
+        ),
         resolvers := Seq(jbossRepo
           , akkaRepo
           , sonatypeRepo
@@ -53,15 +57,15 @@ object Dependencies {
     val slf4jSimple     = "org.slf4j" % "slf4j-simple" % "1.6.2"
     val slf4jSimpleTest = slf4jSimple % "test"
 
-    val jettyVersion    = "7.4.0.v20110414"
-    val jettyServer     = "org.eclipse.jetty" % "jetty-server" % jettyVersion
-    val jettyServlet    = "org.eclipse.jetty" % "jetty-servlet" % jettyVersion
-    val jettyServerTest = jettyServer % "test"
+//    val jettyVersion    = "7.4.0.v20110414"
+//    val jettyServer     = "org.eclipse.jetty" % "jetty-server" % jettyVersion
+//    val jettyServlet    = "org.eclipse.jetty" % "jetty-servlet" % jettyVersion
+//    val jettyServerTest = jettyServer % "test"
 
     val asyncHttp       = "com.ning" % "async-http-client" % "1.6.5" exclude("org.jboss.netty", "netty") exclude("org.slf4j", "slf4j-api")
     val jsoup           = "org.jsoup" % "jsoup" % "1.6.1"
-    val casbahCore      = "org.mongodb" % "casbah-core_2.10" % "2.8.2"
-    val actor           = "com.typesafe.akka" %% "akka-actor" % "2.3.7"
+//    val casbahCore      = "org.mongodb" % "casbah-core_2.10" % "2.8.2"
+    val actor           = "com.typesafe.akka" %% "akka-actor" % "2.3.12"
     val rabbitmq        = "com.thenewmotion.akka" %% "akka-rabbitmq" % "1.2.4"
 
     val sse       = "de.heikoseeberger" %% "akka-sse" % "1.0.0"
@@ -79,7 +83,7 @@ object Dependencies {
     val nekohtml  = "net.sourceforge.nekohtml" % "nekohtml" % "1.9.13"
     val fihttp    = "com.twitter" %% "finagle-http" % "6.28.0"
     val fihttpx   = "com.twitter" %% "finagle-httpx" % "6.28.0"
-    val mapper    = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.13"
+//    val mapper    = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.13"
     val finagle   = "com.twitter" %% "finagle-core" % "6.28.0"
 
     val json4sNative = "org.json4s" %% "json4s-native" % "3.2.11"
@@ -95,7 +99,7 @@ object WebWordsBuild extends Build {
 
   lazy val graphSettings: Seq[Def.Setting[_]] = net.virtualvoid.sbt.graph.Plugin.graphSettings
 
-  /*lazy val root = Project("webwordsV2",
+  lazy val root = Project("webwordsV2",
                             file("."),
                             settings = projectSettings ++
                             Seq(
@@ -103,7 +107,7 @@ object WebWordsBuild extends Build {
                             )) aggregate(common, web, indexer, message, mining, boilerpipe
                             , demo
                             , restful
-      ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)*/
+      ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)
 
     lazy val web = Project("webwords-web",
                             file("web"),
@@ -115,10 +119,7 @@ object WebWordsBuild extends Build {
                             ))) dependsOn(common % "compile->compile;test->test"
                               , boilerpipe % "compile->compile;test->test"
                               , mining % "compile->compile;test->test"
-                            ) aggregate(common, indexer, message, mining, boilerpipe
-      , demo
-      , restful
-      ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)
+                            ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)
 
     lazy val indexer = Project("webwords-indexer",
                             file("indexer"),
