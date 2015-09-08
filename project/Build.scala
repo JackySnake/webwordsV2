@@ -219,4 +219,3 @@ object WebWordsBuild extends Build {
         ) settings(graphSettings: _*) //enablePlugins(JavaAppPackaging)
 
 }
-
