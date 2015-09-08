@@ -1,7 +1,6 @@
 import com.typesafe.sbt.packager.archetypes.JavaAppPackaging
 import sbt._
 import Keys._
-import com.typesafe.sbt.{SbtNativePackager}
 import com.heroku.sbt.HerokuPlugin.autoImport._
 
 object BuildSettings {
@@ -96,7 +95,7 @@ object WebWordsBuild extends Build {
 
   lazy val graphSettings: Seq[Def.Setting[_]] = net.virtualvoid.sbt.graph.Plugin.graphSettings
 
-  lazy val root = Project("webwordsV2",
+  /*lazy val root = Project("webwordsV2",
                             file("."),
                             settings = projectSettings ++
                             Seq(
@@ -104,7 +103,7 @@ object WebWordsBuild extends Build {
                             )) aggregate(common, web, indexer, message, mining, boilerpipe
                             , demo
                             , restful
-      ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)
+      ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)*/
 
     lazy val web = Project("webwords-web",
                             file("web"),
@@ -116,7 +115,10 @@ object WebWordsBuild extends Build {
                             ))) dependsOn(common % "compile->compile;test->test"
                               , boilerpipe % "compile->compile;test->test"
                               , mining % "compile->compile;test->test"
-                            ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)
+                            ) aggregate(common, indexer, message, mining, boilerpipe
+      , demo
+      , restful
+      ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)
 
     lazy val indexer = Project("webwords-indexer",
                             file("indexer"),
@@ -146,11 +148,6 @@ object WebWordsBuild extends Build {
                             Seq(libraryDependencies ++= Seq(
                               actor
                               , rabbit
-                              , logging
-                              , logcore
-                              , logback
-                              , scalatest
-                              , config
                               , sse
                               , rabbitmq
                             ))) settings(graphSettings: _*)
@@ -159,16 +156,7 @@ object WebWordsBuild extends Build {
       file("mining"),
       settings = projectSettings ++
         Seq(libraryDependencies ++= Seq(
-          actor
-          , rabbit
-          , logging
-          , logcore
-          , logback
-          , scalatest
-          , config
-          , sse
-          , rabbitmq
-          , gson
+          gson
           , commonsio
           , opennlp
           , jwnl))) settings(graphSettings: _*)
@@ -177,16 +165,7 @@ object WebWordsBuild extends Build {
     file("boilerpipe"),
     settings = projectSettings ++
       Seq(libraryDependencies ++= Seq(
-        actor
-        , rabbit
-        , logging
-        , logcore
-        , logback
-        , scalatest
-        , config
-        , sse
-        , rabbitmq
-        , gson
+        gson
         , nekohtml
         , opennlp
         , xerces))) settings(graphSettings: _*)
@@ -196,18 +175,18 @@ object WebWordsBuild extends Build {
     settings = projectSettings ++
       Seq(libraryDependencies ++= Seq(
         actor
-        , rabbit
-        , logging
-        , logcore
-        , logback
-        , scalatest
-        , config
-        , sse
-        , rabbitmq
-        , gson
-        , nekohtml
-        , opennlp
-        , xerces
+//        , rabbit
+//        , logging
+//        , logcore
+//        , logback
+//        , scalatest
+//        , config
+//        , sse
+//        , rabbitmq
+//        , gson
+//        , nekohtml
+//        , opennlp
+//        , xerces
       ))) dependsOn(boilerpipe % "compile->compile;test->test"
         , mining % "compile->compile;test->test"
       ) settings(graphSettings: _*)
@@ -217,10 +196,10 @@ object WebWordsBuild extends Build {
         settings = projectSettings ++
 //        SbtStartScript.startScriptForClassesSettings ++
         Seq(libraryDependencies ++= Seq(
-          actor
-          , fihttp
-          , fihttpx
-          , mapper
+//          actor
+//          , fihttp
+          fihttpx
+//          , mapper
           , finagle
 //          , json4sNative
 //          , json4sJackson

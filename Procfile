@@ -1,1 +1,1 @@
-web: indexer/target/universal/stage/bin/webwords-web
+web: web/target/universal/stage/bin/webwords-web
