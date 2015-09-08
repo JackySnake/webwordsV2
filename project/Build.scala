@@ -1,5 +1,3 @@
-//import com.typesafe.sbt.SbtNativePackager.packageArchetype
-
 import com.typesafe.sbt.packager.archetypes.JavaAppPackaging
 import sbt._
 import Keys._
@@ -98,7 +96,7 @@ object WebWordsBuild extends Build {
 
   lazy val graphSettings: Seq[Def.Setting[_]] = net.virtualvoid.sbt.graph.Plugin.graphSettings
 
-  /*lazy val root = Project("webwordsV2",
+  lazy val root = Project("webwordsV2",
                             file("."),
                             settings = projectSettings ++
                             Seq(
@@ -107,23 +105,18 @@ object WebWordsBuild extends Build {
                             , demo
                             , restful
       ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)
-*/
+
     lazy val web = Project("webwords-web",
                             file("web"),
                             settings = projectSettings ++
 //                            SbtStartScript.startScriptForClassesSettings ++
-                            Seq(
-
-                              libraryDependencies ++= Seq(
+                            Seq(libraryDependencies ++= Seq(
                               finagle
-                              , fihttpx)
-                            )) dependsOn(common % "compile->compile;test->test"
-    , boilerpipe % "compile->compile;test->test"
-    , mining % "compile->compile;test->test"
-    ) aggregate(common, mining, boilerpipe
-    , demo
-    , restful
-    ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)
+                              , fihttpx
+                            ))) dependsOn(common % "compile->compile;test->test"
+                              , boilerpipe % "compile->compile;test->test"
+                              , mining % "compile->compile;test->test"
+                            ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)
 
     lazy val indexer = Project("webwords-indexer",
                             file("indexer"),
@@ -145,7 +138,7 @@ object WebWordsBuild extends Build {
                              asyncHttp
                              , json4sNative
                              , json4sJackson
-                           ))) settings(graphSettings: _*) //enablePlugins(SbtNativePackager)
+                           ))) settings(graphSettings: _*)
 
     lazy val message = Project("webwords-message",
                           file("rabbitmq-akka-stream"),
@@ -160,7 +153,7 @@ object WebWordsBuild extends Build {
                               , config
                               , sse
                               , rabbitmq
-                            ))) settings(graphSettings: _*) //enablePlugins(SbtNativePackager)
+                            ))) settings(graphSettings: _*)
 
     lazy val mining = Project("webwords-mining",
       file("mining"),
@@ -178,9 +171,9 @@ object WebWordsBuild extends Build {
           , gson
           , commonsio
           , opennlp
-          , jwnl))) settings(graphSettings: _*) //enablePlugins(SbtNativePackager)
+          , jwnl))) settings(graphSettings: _*)
 
-  lazy val boilerpipe = Project("webwords-boilerpipe-common",
+  lazy val boilerpipe = Project("webwords-boilerpipe",
     file("boilerpipe-common"),
     settings = projectSettings ++
       Seq(libraryDependencies ++= Seq(
@@ -196,7 +189,7 @@ object WebWordsBuild extends Build {
         , gson
         , nekohtml
         , opennlp
-        , xerces))) settings(graphSettings: _*) //enablePlugins(SbtNativePackager)
+        , xerces))) settings(graphSettings: _*)
 
   lazy val demo = Project("webwords-demo",
     file("demo"),
@@ -217,7 +210,7 @@ object WebWordsBuild extends Build {
         , xerces
       ))) dependsOn(boilerpipe % "compile->compile;test->test"
         , mining % "compile->compile;test->test"
-      ) settings(graphSettings: _*) //enablePlugins(SbtNativePackager)
+      ) settings(graphSettings: _*)
 
     lazy val restful = Project("webwords-restful",
         file("restful-service"),
