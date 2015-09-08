@@ -1,1 +1,1 @@
-indexer: indexer/target/start Main
+web: indexer/target/universal/stage/bin/webwords-web
