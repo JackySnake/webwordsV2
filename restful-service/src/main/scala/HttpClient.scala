@@ -1,11 +1,11 @@
-import com.twitter.finagle.builder.ClientBuilder
+/*import com.twitter.finagle.builder.ClientBuilder
 import com.twitter.finagle.http.Http
 import java.net.InetSocketAddress
 import org.jboss.netty.handler.codec.http._
 import org.jboss.netty.handler.codec.http.HttpResponseStatus._
 import com.twitter.finagle.{Service, SimpleFilter}
 import com.twitter.io.Charsets
-import com.twitter.util.Future
+import com.twitter.util.Future*/
 
 /**
  * A somewhat advanced example of using Filters with Clients. Below, HTTP 4xx and 5xx

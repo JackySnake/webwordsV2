@@ -1,4 +1,4 @@
-import com.kohlschutter.boilerpipe.extractors.{CommonExtractors}
+/*import com.kohlschutter.boilerpipe.extractors.{CommonExtractors}
 import com.kohlschutter.boilerpipe.sax.HTMLHighlighter
 import com.ssreader.service.model.{ArticleContent, ArticleLink}
 import com.twitter.finagle.Service
@@ -15,7 +15,7 @@ import org.json4s._
 import org.json4s.native.Serialization.{write}
 
 import uk.ac.shef.dcs.jate.model.{Term, InMemoryDocument}
-import uk.ac.shef.dcs.jate.processing.KeywordExtraction
+import uk.ac.shef.dcs.jate.processing.KeywordExtraction*/
 
 
 /**
@@ -23,7 +23,7 @@ import uk.ac.shef.dcs.jate.processing.KeywordExtraction
  */
 object ServerExample extends App {
   // Define our service: OK response for root, 404 for other paths
-  val rootService = new Service[HttpRequest, HttpResponse] {
+  /*val rootService = new Service[HttpRequest, HttpResponse] {
     def apply(request: HttpRequest) = {
       val r = request.getUri match {
         case "/api/read" => {
@@ -83,5 +83,5 @@ object ServerExample extends App {
     .codec(Http())
     .bindTo(address)
     .name("HttpServer")
-    .build(rootService)
+    .build(rootService)*/
 }

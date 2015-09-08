@@ -1,12 +1,12 @@
-import com.twitter.finagle.{Http, Service}
+/*import com.twitter.finagle.{Http, Service}
 import com.twitter.util.{Await, Future}
 import java.net.InetSocketAddress
 import org.jboss.netty.handler.codec.http._
-import com.twitter.finagle.builder.{ClientBuilder, ServerBuilder}
+import com.twitter.finagle.builder.{ClientBuilder, ServerBuilder}*/
 
 //#app
 object Proxy extends App {
-  /*val client: Service[HttpRequest, HttpResponse] =
+  /*/*val client: Service[HttpRequest, HttpResponse] =
     Http.newService("joseph.com:80")
 
   val server = Http.serve(":8088", client)
@@ -22,5 +22,5 @@ object Proxy extends App {
     Http.newService("localhost:8080")
 
   val server = Http.serve("127.0.0.1:80", client)
-  Await.ready(server)*/
+  Await.ready(server)*/*/
 }
