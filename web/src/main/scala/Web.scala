@@ -24,7 +24,7 @@ object Web extends App {
     def apply(request: Request): Future[Response] = {
       val res = request.path match {
         case "/api/read" => {
-          println("=============>>>>>>")
+          println("/api/read >>>")
 
           // This is how you parse request parameters
           //          val params = new QueryStringDecoder(request.getUri()).getParameters()
