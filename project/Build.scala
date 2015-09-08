@@ -174,7 +174,7 @@ object WebWordsBuild extends Build {
           , jwnl))) settings(graphSettings: _*)
 
   lazy val boilerpipe = Project("webwords-boilerpipe",
-    file("boilerpipe-common"),
+    file("boilerpipe"),
     settings = projectSettings ++
       Seq(libraryDependencies ++= Seq(
         actor
