@@ -57,9 +57,8 @@ object Main extends App {
           val articleHTML = hh.process(url, extractor)
           val message = write(ArticleContent(articleHTML))
 
-          //                    val res = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK)
-          //
-          //                    res.setContent(copiedBuffer(message, Utf8))
+          // val res = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK)
+          // res.setContent(copiedBuffer(message, Utf8))
 
           val response = Response(request.version, Status.Ok)
           response.setContentTypeJson();
