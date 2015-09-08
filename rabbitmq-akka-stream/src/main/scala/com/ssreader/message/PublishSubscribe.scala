@@ -15,12 +15,6 @@ object PublishSubscribe extends App {
     implicit val system = ActorSystem()
     val factory = new ConnectionFactory()
 
-//    val config = com.typesafe.config.ConfigFactory.load().getConfig("rabbitmq")
-//    factory.setHost(config.getString("host"))
-//    factory.setPort(config.getInt("port"))
-//    factory.setUsername(config.getString("username"))
-//    factory.setPassword(config.getString("password"))
-
     factory.setUri("amqp://wolhehcu:pf057BFQwfxyuQwv7dxediac2FCPmkNF@owl.rmq.cloudamqp.com/wolhehcu")
 
     val connection = system.actorOf(ConnectionActor.props(factory), "rabbitmq")
