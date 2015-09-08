@@ -1,7 +1,9 @@
+import com.typesafe.sbt.SbtStartScript
 import com.typesafe.sbt.packager.archetypes.JavaAppPackaging
 import sbt._
 import Keys._
 import com.heroku.sbt.HerokuPlugin.autoImport._
+import com.typesafe.sbt.SbtNativePackager.autoImport._
 
 object BuildSettings {
     import Dependencies._
@@ -14,6 +16,13 @@ object BuildSettings {
     val globalSettings = Seq(
         herokuJdkVersion in Compile := "1.7",
         herokuAppName in Compile := "ssr-api",
+
+//        mainClass := Some ("com.typesafe.webwords.indexer.Main"),
+
+      mainClass in (Compile, run) := Some("com.typesafe.webwords.indexer.Main"),
+      mainClass in (Compile, packageBin) := Some("com.typesafe.webwords.indexer.Main"),
+//      mainClass in Universal := Some("com.typesafe.webwords.indexer.Main"),
+
         organization := buildOrganization,
         version := buildVersion,
         scalaVersion := buildScalaVersion,
@@ -103,28 +112,28 @@ object WebWordsBuild extends Build {
                             file("."),
                             settings = projectSettings ++
                             Seq(
-//                              SbtStartScript.stage in Compile := Unit
+                              SbtStartScript.stage in Compile := Unit
                             )) aggregate(common, web, indexer, message, mining, boilerpipe
                             , demo
                             , restful
-      ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)
+      ) settings(graphSettings: _*) //enablePlugins(JavaAppPackaging)
 
     lazy val web = Project("webwords-web",
                             file("web"),
                             settings = projectSettings ++
-//                            SbtStartScript.startScriptForClassesSettings ++
+                            SbtStartScript.startScriptForClassesSettings ++
                             Seq(libraryDependencies ++= Seq(
                               finagle
                               , fihttpx
                             ))) dependsOn(common % "compile->compile;test->test"
                               , boilerpipe % "compile->compile;test->test"
                               , mining % "compile->compile;test->test"
-                            ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)
+                            ) settings(graphSettings: _*) // enablePlugins(JavaAppPackaging)
 
     lazy val indexer = Project("webwords-indexer",
                             file("indexer"),
                             settings = projectSettings ++
-//                            SbtStartScript.startScriptForClassesSettings ++
+                            SbtStartScript.startScriptForClassesSettings ++
                             Seq(libraryDependencies ++= Seq(
                               jsoup
                               ,finagle
@@ -132,7 +141,7 @@ object WebWordsBuild extends Build {
                             ))) dependsOn(common % "compile->compile;test->test"
                               , boilerpipe % "compile->compile;test->test"
                               , mining % "compile->compile;test->test"
-                              ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)
+                              ) settings(graphSettings: _*) //enablePlugins(JavaAppPackaging)
 
     lazy val common = Project("webwords-common",
                            file("common"),
@@ -207,7 +216,7 @@ object WebWordsBuild extends Build {
         ))) dependsOn(common % "compile->compile;test->test"
           , boilerpipe % "compile->compile;test->test"
           , mining % "compile->compile;test->test"
-        ) settings(graphSettings: _*) enablePlugins(JavaAppPackaging)
+        ) settings(graphSettings: _*) //enablePlugins(JavaAppPackaging)
 
 }
 
