@@ -48,14 +48,17 @@ object Main extends App {
           val document = new InMemoryDocument(article);
           val extraction = new KeywordExtraction(document);
           val terms: Array[Term] = extraction.extractKeywords();
-          terms.filter(x => x.getConfidence >= 10)
-            .take(15)
+          terms.take(15)
             .foreach(x => println("%s %s", x.getConcept, x.getConfidence))
+
+          val keyword = terms.take(15).map(x => x.getConcept).mkString(", ")
+
+          println("%s", keyword)
 
           // choose the operation mode (i.e., highlighting or extraction)
           val hh = HTMLHighlighter.newExtractingInstance()
           val articleHTML = hh.process(url, extractor)
-          val message = write(ArticleContent(articleHTML))
+          val message = write(ArticleContent(articleHTML, keyword))
 
           // val res = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK)
           // res.setContent(copiedBuffer(message, Utf8))
