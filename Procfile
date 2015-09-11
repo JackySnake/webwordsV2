@@ -1,2 +1,2 @@
 sbt: sbt stage
-indexer: indexer/target/start
+indexer: /tmp/scala_buildpack_build_dir/indexer/target/start
