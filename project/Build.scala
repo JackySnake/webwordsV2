@@ -78,18 +78,26 @@ object Dependencies {
     val rabbitmq        = "com.thenewmotion.akka" %% "akka-rabbitmq" % "1.2.4"
 
     val sse       = "de.heikoseeberger" %% "akka-sse" % "1.0.0"
-    val logging   = "com.typesafe.scala-logging" %%  "scala-logging-slf4j"      % "2.1.2"
+
+  val logging   = "com.typesafe.scala-logging" %%  "scala-logging-slf4j"      % "2.1.2"
     val config    = "com.typesafe" % "config" % "1.2.1"
+
     val rabbit    = "io.scalac" %% "reactive-rabbit" % "1.0.1"
     val logcore    = "ch.qos.logback"  %   "logback-core"             % "1.1.3"
     val logback   = "ch.qos.logback" %   "logback-classic"          % "1.1.3"
     val scalatest = "org.scalatest"              %%  "scalatest"                % "2.2.1" % "test"
-    val gson      = "com.google.code.gson" % "gson" % "2.3.1"
-    val commonsio = "commons-io" % "commons-io" % "2.4"
+
+  val gson      = "com.google.code.gson" % "gson" % "2.3.1"
+  val guava     = "com.google.guava" % "guava" % "18.0"
+
+  val commons3 = "org.apache.commons" % "commons-lang3" % "3.4"
+  val commonsio = "commons-io" % "commons-io" % "2.4"
+
     val opennlp   = "org.apache.opennlp" % "opennlp-tools" % "1.5.3"
     val jwnl      = "net.sf.jwordnet" % "jwnl" % "1.3.3"
     val xerces    = "xerces" % "xercesImpl" % "2.9.1"
     val nekohtml  = "net.sourceforge.nekohtml" % "nekohtml" % "1.9.13"
+
     val fihttp    = "com.twitter" %% "finagle-http" % "6.28.0"
     val fihttpx   = "com.twitter" %% "finagle-httpx" % "6.28.0"
 //    val mapper    = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.13"
@@ -185,6 +193,8 @@ object WebWordsBuild extends Build {
     settings = projectSettings ++
       Seq(libraryDependencies ++= Seq(
         actor
+      , guava
+      , commons3
 //        , rabbit
 //        , logging
 //        , logcore
