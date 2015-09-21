@@ -22,8 +22,15 @@ object BigDocs extends App {
 
   lines map getText
 
-   Await.result(Future.traverse(lines)(getText), 30 second)
+  val result = Future.traverse(lines)(getText)
 
+  val start = System.currentTimeMillis
+
+   Await.result(result, 15 second)
+
+  val timeElapsed = System.currentTimeMillis - start
+
+  println(timeElapsed)
 
   /*val start = System.currentTimeMillis
   val doubled = Await.result({
@@ -48,11 +55,15 @@ object BigDocs extends App {
         println(">>> " + link)
         val url: URL = new URL(link)
         val extractor = CommonExtractors.ARTICLE_EXTRACTOR
-        val hh = HTMLHighlighter.newExtractingInstance()
-        val  result = hh.process(url, extractor)
-      println(result)
 
-      result
+      val article = extractor.getText(url)
+
+//        val hh = HTMLHighlighter.newExtractingInstance()
+//        val  result = hh.process(url, extractor)
+
+      println(article)
+
+      article
     }
 
 
