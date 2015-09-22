@@ -452,3 +452,12 @@ https://github.com/typesafehub/webwords/blob/heroku-devcenter/common/src/main/sc
 "WorkQueueWorkerActor.scala"
 
 [xsbtsetup]: https://github.com/harrah/xsbt/wiki/Setup "SBT setup"
+
+========================================================================================================================
+    parse XML documents (extract topic and content)
+    tokenize and stem the documents
+    create a dictionary out of all the words in the collection of documents and compute IDF (Inverse Document Frequency for each term)
+    vectorize documents using TF-IDF scores
+    train the Naive Bayes classifier
+    classify HTML documents
+

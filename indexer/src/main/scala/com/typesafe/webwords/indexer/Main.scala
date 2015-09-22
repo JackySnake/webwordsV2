@@ -45,6 +45,8 @@ object Main extends App {
           val extractor = CommonExtractors.ARTICLE_EXTRACTOR
 
           val article = extractor.getText(url)
+
+
           val document = new InMemoryDocument(article);
           val extraction = new KeywordExtraction(document);
           val terms: Array[Term] = extraction.extractKeywords();
