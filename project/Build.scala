@@ -105,6 +105,8 @@ object Dependencies {
 
     val json4sNative = "org.json4s" %% "json4s-native" % "3.2.11"
     val json4sJackson = "org.json4s" %% "json4s-jackson" % "3.2.11" exclude("com.fasterxml.jackson.core", "jackson-databind")
+
+  val coreNLP = "edu.stanford.nlp" % "stanford-corenlp" % "3.5.2"
 }
 
 object WebWordsBuild extends Build {
@@ -195,6 +197,7 @@ object WebWordsBuild extends Build {
         actor
       , guava
       , commons3
+      , coreNLP
 //        , rabbit
 //        , logging
 //        , logcore
