@@ -93,20 +93,26 @@ object Dependencies {
   val commons3 = "org.apache.commons" % "commons-lang3" % "3.4"
   val commonsio = "commons-io" % "commons-io" % "2.4"
 
-    val opennlp   = "org.apache.opennlp" % "opennlp-tools" % "1.5.3"
     val jwnl      = "net.sf.jwordnet" % "jwnl" % "1.3.3"
-    val xerces    = "xerces" % "xercesImpl" % "2.9.1"
-    val nekohtml  = "net.sourceforge.nekohtml" % "nekohtml" % "1.9.13"
 
+  val xerces    = "xerces" % "xercesImpl" % "2.9.1"
+  val nekohtml  = "net.sourceforge.nekohtml" % "nekohtml" % "1.9.13"
     val fihttp    = "com.twitter" %% "finagle-http" % "6.28.0"
-    val fihttpx   = "com.twitter" %% "finagle-httpx" % "6.28.0"
-//    val mapper    = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.13"
+
+  val fihttpx   = "com.twitter" %% "finagle-httpx" % "6.28.0"
+  //    val mapper    = "org.codehaus.jackson" % "jackson-mapper-asl" % "1.9.13"
     val finagle   = "com.twitter" %% "finagle-core" % "6.28.0"
-
     val json4sNative = "org.json4s" %% "json4s-native" % "3.2.11"
-    val json4sJackson = "org.json4s" %% "json4s-jackson" % "3.2.11" exclude("com.fasterxml.jackson.core", "jackson-databind")
 
-  val coreNLP = "edu.stanford.nlp" % "stanford-corenlp" % "3.5.2"
+  val json4sJackson = "org.json4s" %% "json4s-jackson" % "3.2.11" exclude("com.fasterxml.jackson.core", "jackson-databind")
+
+  val coreNLP = "edu.stanford.nlp" % "stanford-corenlp" % "3.4.1"
+
+  val opennlp   = "org.apache.opennlp" % "opennlp-tools" % "1.5.3"
+
+  val tika = "org.apache.tika" % "tika-core" % "1.10"
+
+  val tikaParser = "org.apache.tika" % "tika-parsers" % "1.10"
 }
 
 object WebWordsBuild extends Build {
@@ -198,6 +204,9 @@ object WebWordsBuild extends Build {
       , guava
       , commons3
       , coreNLP
+      , tika
+      , tikaParser
+      , commonsio
 //        , rabbit
 //        , logging
 //        , logcore
