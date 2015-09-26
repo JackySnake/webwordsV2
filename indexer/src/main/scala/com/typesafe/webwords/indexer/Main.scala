@@ -1,6 +1,6 @@
 package com.typesafe.webwords.indexer
 
-import java.net.{InetSocketAddress, SocketAddress, URL}
+import java.net.{URL}
 import util.Properties
 
 import com.kohlschutter.boilerpipe.extractors.CommonExtractors
@@ -30,15 +30,16 @@ object Main extends App {
           // This is how you parse request parameters
           //          val params = new QueryStringDecoder(request.getUri()).getParameters()
 
-          val jsonContent = request.asInstanceOf[Request].getContentString()
+          /*val jsonContent = request.asInstanceOf[Request].getContentString()
 
           implicit val formats = DefaultFormats
 
           val defaultsJson = Extraction.decompose()
           val valueJson = JsonUtil.jValue(jsonContent)
-          val link: ArticleLink = (defaultsJson merge valueJson).extract[ArticleLink]
+          val link: ArticleLink = (defaultsJson merge valueJson).extract[ArticleLink]*/
 
-          val url: URL = new URL(link.link)
+          val link: String = getLinkRequest(request)
+          val url: URL = new URL(link)
 
           //          val url: URL = new URL("http://www.npr.org/sections/health-shots/2013/10/18/236211811/brains-sweep-themselves-clean-of-toxins-during-sleep")
 
@@ -112,4 +113,15 @@ object Main extends App {
     .bindTo(socketAddress)
     .name("HTTP endpoint")
     .build(rootService)*/
+
+  def getLinkRequest(request: Request): String = {
+    implicit val formats = DefaultFormats
+
+    val jsonContent = request.asInstanceOf[Request].getContentString()
+    val defaultsJson = Extraction.decompose()
+    val valueJson = JsonUtil.jValue(jsonContent)
+    val link: ArticleLink = (defaultsJson merge valueJson).extract[ArticleLink]
+
+    link.link
+  }
 }
