@@ -10,6 +10,7 @@ public class NERExample {
 
     public static void main(String[] args) throws Exception {
 
+
         String serializedClassifier = "stanford_classifiers/english.all.3class.distsim.crf.ser.gz";
 
         AbstractSequenceClassifier<CoreLabel> classifier = CRFClassifier.getClassifier(serializedClassifier);
